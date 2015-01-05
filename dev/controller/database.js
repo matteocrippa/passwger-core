@@ -1,6 +1,7 @@
 window.dash = window.dash || {}
 
 var low = require('lowdb')
+low.mixin(require('underscore-db'))
 
 var db = null
 
