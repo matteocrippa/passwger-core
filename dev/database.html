@@ -198,11 +198,35 @@
 
     function showTotItemsFolder(){
 
-      $('#fold-password a').append(' (0)')
-      $('#fold-wifi a').append(' (1)')
-      $('#fold-server a').append(' (2)')
-      $('#fold-identity a').append(' (3)')
-      $('#fold-banking a').append(' (4)')
+      if(db.object.password){
+        $('#fold-password a').append(' ('+db.object.password.length+')')
+      }else{
+        $('#fold-password a').append(' (0)')
+      }
+
+      if(db.object.wifi){
+        $('#fold-wifi a').append(' ('+db.object.wifi.length+')')
+      }else{
+        $('#fold-wifi a').append(' (0)')
+      }
+
+      if(db.object.server){
+        $('#fold-server a').append(' ('+db.object.server.length+')')
+      }else{
+        $('#fold-server a').append(' (0)')
+      }
+
+      if(db.object.identity){
+        $('#fold-identity a').append(' ('+db.object.identity.length+')')
+      }else{
+        $('#fold-identity a').append(' (0)')
+      }
+
+      if(db.object.banking){
+        $('#fold-banking a').append(' ('+db.object.banking.length+')')
+      }else{
+        $('#fold-banking a').append(' (0)')
+      }
 
     }
 
