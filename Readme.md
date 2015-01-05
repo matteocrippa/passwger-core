@@ -5,6 +5,17 @@ _A cross-platform password manager._
 
 **Passwger** allows you to manage your password easily under **multiple Os** (**Mac, Windows, Linux**).
 
+## Screenshots
+
+### Client
+
+![Password Setup](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen3.png)
+
+![Password Unlock](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen2.png)
+
+![Password Database](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen1.png)
+
+
 ## Features
 
 - multi-OS client
