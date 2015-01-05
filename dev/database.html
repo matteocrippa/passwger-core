@@ -147,26 +147,26 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Website:</span>
-                  <input name="email_to" type="email" class="form-control" placeholder="Domain">
+                  <input id="form-name" type="text" class="form-control" placeholder="Domain">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Username:</span>
-                  <input name="email_to" type="email" class="form-control" placeholder="Username">
+                  <input id="form-username" type="email" class="form-control" placeholder="Username">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Password:</span>
-                  <input name="email_to" type="password" class="form-control" placeholder="Password">
+                  <input id="form-password" type="password" class="form-control" placeholder="Password">
                 </div>
               </div>
 
             </div>
             <div class="modal-footer clearfix">
 
-              <button type="submit" class="btn btn-primary "><i class="fa fa-envelope"></i> Save entry</button>
+              <button type="submit" class="btn btn-primary" id="saveEntry"><i class="fa fa-envelope"></i> Save entry</button>
               <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
 
             </div>
@@ -192,10 +192,11 @@
 
       $('#password-list').children().children().remove()
 
-      if(db(folder).object){
+      if(db(folder)){
 
-        if(db(folder).object.length > 0){
-          $.each(db(folder).object, function(index, value){
+        if(db(folder).value().length > 0){
+
+          $.each(db(folder).value(), function(index, value){
 
             var classItem = ""
 
@@ -227,33 +228,33 @@
     function showTotItemsFolder(){
 
       if(db.object.password){
-        $('#fold-password a').append(' ('+db.object.password.length+')')
+        $('#fold-password a').html('Password ('+db.object.password.length+')')
       }else{
-        $('#fold-password a').append(' (0)')
+        $('#fold-password a').html('Password (0)')
       }
 
       if(db.object.wifi){
-        $('#fold-wifi a').append(' ('+db.object.wifi.length+')')
+        $('#fold-wifi a').html('Wi-Fi ('+db.object.wifi.length+')')
       }else{
-        $('#fold-wifi a').append(' (0)')
+        $('#fold-wifi a').html('Wi-Fi (0)')
       }
 
       if(db.object.server){
-        $('#fold-server a').append(' ('+db.object.server.length+')')
+        $('#fold-server a').html('Server ('+db.object.server.length+')')
       }else{
-        $('#fold-server a').append(' (0)')
+        $('#fold-server a').html('Server (0)')
       }
 
       if(db.object.identity){
-        $('#fold-identity a').append(' ('+db.object.identity.length+')')
+        $('#fold-identity a').html('Identity ('+db.object.identity.length+')')
       }else{
-        $('#fold-identity a').append(' (0)')
+        $('#fold-identity a').html('Identity (0)')
       }
 
       if(db.object.banking){
-        $('#fold-banking a').append(' ('+db.object.banking.length+')')
+        $('#fold-banking a').html('Banking ('+db.object.banking.length+')')
       }else{
-        $('#fold-banking a').append(' (0)')
+        $('#fold-banking a').html('Banking (0)')
       }
 
     }
@@ -309,6 +310,31 @@
         $('#unlock-wrongpass').removeClass('hide')
       }
 
+    })
+
+    function getCurrentFolder(){
+      return 'password'
+    }
+
+    $('#saveEntry').on('click', function(e){
+
+      e.preventDefault()
+
+      var currentFolder = getCurrentFolder()
+
+      dash.addEntry(currentFolder,{
+        name: $('#form-name').val(),
+        username: $('#form-username').val(),
+        password: $('#form-password').val()
+      })
+
+      $('#form-username').val('')
+      $('#form-password').val('')
+      $('#form-domain').val('')
+
+      showTotItemsFolder()
+
+      populateList(currentFolder)
     })
 
   </script>
