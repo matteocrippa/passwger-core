@@ -1,0 +1,30 @@
+{
+  "name": "Passwger",
+  "version": "0.0.1",
+  "description": "A crossplatform password manager",
+  "main": "index.html",
+  "dependencies": {
+    "express": "^4.10.6",
+    "lowdb": "matteocrippa/lowdb"
+  },
+  "keywords": [
+    "password",
+    "manager",
+    "login",
+    "manager",
+    "password"
+  ],
+  "author": "Matteo Crippa",
+  "license": "MIT",
+  "window": {
+    "toolbar": true,
+    "resizable": false,
+    "width": 800,
+    "height": 600,
+    "min_width": 600,
+    "min_height": 600,
+    "max_width": 1000,
+    "max_height": 700,
+    "position": "center"
+  }
+}

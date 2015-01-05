@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="bg-black">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Database // Passwger</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <!-- bootstrap 3.0.2 -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- font Awesome -->
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <!-- Theme style -->
+  <link href="assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+
+  <script src="assets/js/jquery.min.js"></script>
+
+  <script type="text/javascript" src="controller/index.js"></script>
+  <script type="text/javascript" src="controller/database.js"></script>
+  <script type="text/javascript">
+
+  var db = null
+
+  if (!localStorage.getItem('database')){
+    location.href = 'setup.html'
+  }
+
+  if(!dash.dbExists()){
+    localStorage.removeItem('database')
+    location.href = 'setup.html'
+  }
+
+  $(document).ready(function(){
+    if(!db){
+      document.title = 'Unlock Database // Passwger'
+      $('#unlock-box').removeClass('hide')
+    }
+
+  })
+
+  </script>
+</head>
+
+<body class="bg-black">
+
+  <div class="form-box hide" id="unlock-box">
+
+    <!-- START LOCK SCREEN ITEM -->
+    <div class="lockscreen-item">
+      <!-- lockscreen image -->
+      <div class="lockscreen-image">
+        <img src="assets/img/passwger-logo.png" alt="user image" />
+      </div>
+      <!-- /.lockscreen-image -->
+
+      <!-- lockscreen credentials (contains the form) -->
+      <div class="lockscreen-credentials">
+
+        <div class="input-group">
+          <input type="password" class="form-control" id="password" placeholder="password" />
+          <div class="input-group-btn">
+            <button class="btn btn-flat" id="unlock"><i class="fa fa-arrow-right text-muted"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.lockscreen credentials -->
+
+    </div>
+    <!-- /.lockscreen-item -->
+
+    <div class="lockscreen-link">
+      <label class="control-label hide" for="password" id="unlock-wrongpass"><i class="fa fa-times-circle-o"></i> Wrong Password<br/></label>
+      Please insert your database password to unlock it.
+    </div>
+  </div>
+
+  <div id="database-box" class="hide">
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+      <!-- Left side column. contains the logo and sidebar -->
+
+      <!-- Right side column. Contains the navbar and content of the page -->
+      <aside >
+
+        <!-- Main content -->
+        <section class="content" style="height: 600px;">
+          <!-- MAILBOX BEGIN -->
+          <div class="mailbox row">
+            <div class="col-xs-12">
+              <div class="box box-solid">
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-4">
+
+                      <!-- compose message btn -->
+                      <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Add new entry</a>
+                      <!-- Navigation - folders-->
+                      <div style="margin-top: 15px;">
+                        <ul class="nav nav-pills nav-stacked">
+                          <li class="header">Folders</li>
+                          <li class="active"><a href="#"><i class="fa fa-key"></i> Password (14)</a></li>
+                          <li><a href="#"><i class="fa fa-hdd-o"></i> Server</a></li>
+                          <li><a href="#"><i class="fa fa-rss"></i> Wi-Fi</a></li>
+                          <li><a href="#"><i class="fa fa-credit-card"></i> Banking</a></li>
+                          <li><a href="#"><i class="fa fa-male"></i> Identity</a></li>
+                        </ul>
+                      </div>
+                    </div><!-- /.col (LEFT) -->
+                    <div class="col-md-9 col-sm-8">
+                      <div class="row pad">
+                        <div class="col-sm-12 search-form">
+                          <form action="#" class="text-right">
+                            <div class="input-group">
+                              <input type="text" class="form-control input-sm" placeholder="Search">
+                              <div class="input-group-btn">
+                                <button type="submit" name="q" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div><!-- /.row -->
+
+                      <div class="table-responsive">
+                        <!-- THE MESSAGES -->
+                        <table class="table table-mailbox">
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr>
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+                          <tr class="unread">
+                            <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
+                            <td class="name"><a href="#">Domain</a></td>
+                          </tr>
+
+                        </table>
+                      </div><!-- /.table-responsive -->
+                    </div><!-- /.col (RIGHT) -->
+                  </div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col (MAIN) -->
+          </div>
+          <!-- MAILBOX END -->
+
+        </section><!-- /.content -->
+      </aside><!-- /.right-side -->
+    </div><!-- ./wrapper -->
+
+    <!-- COMPOSE MESSAGE MODAL -->
+    <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form action="#" method="post">
+            <div class="modal-body">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Website:</span>
+                  <input name="email_to" type="email" class="form-control" placeholder="Domain">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Username:</span>
+                  <input name="email_to" type="email" class="form-control" placeholder="Username">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Password:</span>
+                  <input name="email_to" type="password" class="form-control" placeholder="Password">
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer clearfix">
+
+              <button type="submit" class="btn btn-primary "><i class="fa fa-envelope"></i> Save entry</button>
+              <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
+
+            </div>
+          </form>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script src="assets/js/app.js" type="text/javascript"></script>
+
+  </div>
+
+
+  <!-- jQuery 2.0.2 -->
+  <script type="text/javascript">
+
+    $('#unlock').on('click', function(){
+
+      db = dash.openDB($('#password').val())
+
+      if(db.object.settings[0].created){
+        $('#unlock-box').addClass('hide')
+        $('#database-box').removeClass('hide')
+
+        document.title = 'Database // Passwger'
+
+        /*if(db.object.passwords){
+          $('#tot-items').html(db.object.passwords.length + " items stored")
+        }else{
+          $('#tot-items').html("No items stored yet")
+        }*/
+      }else{
+        $('#unlock-wrongpass').removeClass('hide')
+      }
+
+    })
+
+  </script>
+
+</body>
+
+</html>

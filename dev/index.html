@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <script type="text/javascript" src="controller/index.js"></script>
+    <script type="text/javascript">
+      if (localStorage.getItem('database')){
+        if(!dash.dbExists()){
+          localStorage.removeItem('database')
+          location.href = 'setup.html'
+        }else{
+          location.href = 'database.html'
+        }
+      }else{
+        location.href = 'setup.html'
+      }
+    </script>
+  </head>
+</html>

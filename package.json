@@ -1,0 +1,18 @@
+{
+  "name": "PasswgerBuilder",
+  "version": "0.0.1",
+  "description": "A crossplatform password manager builder script",
+  "main": "builder.js",
+  "dependencies": {
+    "node-webkit-builder":"*"
+  },
+  "keywords": [
+    "password",
+    "manager",
+    "login",
+    "manager",
+    "password"
+  ],
+  "author": "Matteo Crippa",
+  "license": "MIT"
+}
