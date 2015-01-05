@@ -94,15 +94,16 @@
 
                       <!-- compose message btn -->
                       <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Add new entry</a>
+
                       <!-- Navigation - folders-->
                       <div style="margin-top: 15px;">
-                        <ul class="nav nav-pills nav-stacked">
+                        <ul class="nav nav-pills nav-stacked" id="folder-menu">
                           <li class="header">Folders</li>
-                          <li id="fold-password" class="active"><a href="#"><i class="fa fa-key"></i> Password</a></li>
-                          <li id="fold-server"><a href="#"><i class="fa fa-hdd-o"></i> Server</a></li>
-                          <li id="fold-wifi"><a href="#"><i class="fa fa-rss"></i> Wi-Fi</a></li>
-                          <li id="fold-banking"><a href="#"><i class="fa fa-credit-card"></i> Banking</a></li>
-                          <li id="fold-identity"><a href="#"><i class="fa fa-male"></i> Identity</a></li>
+                          <li id="fold-password" class="active"><a id="a-password" href="#"><i class="fa fa-key"></i> Password</a></li>
+                          <li id="fold-server"><a id="a-server" href="#"><i class="fa fa-hdd-o"></i> Server</a></li>
+                          <li id="fold-wifi"><a id="a-wifi" href="#"><i class="fa fa-rss"></i> Wi-Fi</a></li>
+                          <li id="fold-banking"><a id="a-banking" href="#"><i class="fa fa-credit-card"></i> Banking</a></li>
+                          <li id="fold-identity"><a id="a-identity" href="#"><i class="fa fa-male"></i> Identity</a></li>
                         </ul>
                       </div>
                     </div><!-- /.col (LEFT) -->
@@ -123,8 +124,6 @@
                       <div class="table-responsive">
                         <!-- THE MESSAGES -->
                         <table class="table table-mailbox" id="password-list">
-
-
                         </table>
                       </div><!-- /.table-responsive -->
                     </div><!-- /.col (RIGHT) -->
@@ -187,12 +186,41 @@
   <!-- jQuery 2.0.2 -->
   <script type="text/javascript">
 
-    function populateList(type){
+    function populateList(folder){
 
-      /*<tr class="unread">
-      <td class="small-col"><div class="domain-icon" style="background-image: url('assets/img/placeholder-icon.png');"></div></td>
-      <td class="name"><a href="#">Domain</a></td>
-      </tr>*/
+      $('#fold-'+folder).addClass('active')
+
+      $('#password-list').children().children().remove()
+
+      if(db(folder).object){
+
+        if(db(folder).object.length > 0){
+          $.each(db(folder).object, function(index, value){
+
+            var classItem = ""
+
+            if(index%2==0){
+              classItem = "class='unread'"
+            }
+
+            var item = "<tr "+classItem+"> \
+            <td class='small-col'><div class='domain-icon' style='background-image: url('assets/img/placeholder-icon.png');'></div></td> \
+            <td class='name'><a href='#'>"+value.name+"</a></td> \
+            </tr>"
+
+            $('#password-list').append(item)
+
+          })
+        }else{
+          $('#password-list').append('<tr><td class="name">No items stored yet.</td></tr>')
+        }
+
+
+      }else{
+        $('#password-list').append('<tr><td class="name">No items stored yet.</td></tr>')
+      }
+
+      /**/
 
     }
 
@@ -230,6 +258,39 @@
 
     }
 
+    function deselectAllFolder(){
+
+      $('#folder-menu li').each(function(index, value){
+        $(value).removeClass('active')
+      })
+
+    }
+
+    $('#a-password').on('click', function(){
+      deselectAllFolder()
+      populateList('password')
+    })
+
+    $('#a-wifi').on('click', function(){
+      deselectAllFolder()
+      populateList('wifi')
+    })
+
+    $('#a-banking').on('click', function(){
+      deselectAllFolder()
+      populateList('banking')
+    })
+
+    $('#a-identity').on('click', function(){
+      deselectAllFolder()
+      populateList('identity')
+    })
+
+    $('#a-server').on('click', function(){
+      deselectAllFolder()
+      populateList('server')
+    })
+
     $('#unlock').on('click', function(){
 
       db = dash.openDB($('#password').val())
@@ -239,12 +300,6 @@
         $('#database-box').removeClass('hide')
 
         document.title = 'Database // Passwger'
-
-        /*if(db.object.passwords){
-          $('#tot-items').html(db.object.passwords.length + " items stored")
-        }else{
-          $('#tot-items').html("No items stored yet")
-        }*/
 
         populateList('password')
 
