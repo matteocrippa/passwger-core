@@ -196,7 +196,7 @@
 
         if(db(folder).value().length > 0){
 
-          $.each(db(folder).value(), function(index, value){
+          $.each(db(folder).sortBy('name').value(), function(index, value){
 
             var classItem = ""
 
@@ -220,8 +220,6 @@
       }else{
         $('#password-list').append('<tr><td class="name">No items stored yet.</td></tr>')
       }
-
-      /**/
 
     }
 
@@ -313,6 +311,9 @@
     })
 
     function getCurrentFolder(){
+
+      // TODO: auto pick currently selected folder
+
       return 'password'
     }
 
