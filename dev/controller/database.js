@@ -18,6 +18,6 @@ dash.openDB = function(pwd){
 
 dash.addEntry = function(type,entry){
 
-  db(type).push(entry)
+  return db(type).push(entry).value(id)
 
 }
