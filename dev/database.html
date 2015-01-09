@@ -226,33 +226,33 @@
     function showTotItemsFolder(){
 
       if(db.object.password){
-        $('#fold-password a').html('Password ('+db.object.password.length+')')
+        $('#fold-password a').html('<i class="fa fa-key"></i> Password ('+db.object.password.length+')')
       }else{
-        $('#fold-password a').html('Password (0)')
+        $('#fold-password a').html('<i class="fa fa-key"></i> Password (0)')
       }
 
       if(db.object.wifi){
-        $('#fold-wifi a').html('Wi-Fi ('+db.object.wifi.length+')')
+        $('#fold-wifi a').html('<i class="fa fa-rss"></i> Wi-Fi ('+db.object.wifi.length+')')
       }else{
-        $('#fold-wifi a').html('Wi-Fi (0)')
+        $('#fold-wifi a').html('<i class="fa fa-rss"></i> Wi-Fi (0)')
       }
 
       if(db.object.server){
-        $('#fold-server a').html('Server ('+db.object.server.length+')')
+        $('#fold-server a').html('<i class="fa fa-hdd-o"></i> Server ('+db.object.server.length+')')
       }else{
-        $('#fold-server a').html('Server (0)')
+        $('#fold-server a').html('<i class="fa fa-hdd-o"></i> Server (0)')
       }
 
       if(db.object.identity){
-        $('#fold-identity a').html('Identity ('+db.object.identity.length+')')
+        $('#fold-identity a').html('<i class="fa fa-male"></i> Identity ('+db.object.identity.length+')')
       }else{
-        $('#fold-identity a').html('Identity (0)')
+        $('#fold-identity a').html('<i class="fa fa-male"></i> Identity (0)')
       }
 
       if(db.object.banking){
-        $('#fold-banking a').html('Banking ('+db.object.banking.length+')')
+        $('#fold-banking a').html('<i class="fa fa-credit-card"></i> Banking ('+db.object.banking.length+')')
       }else{
-        $('#fold-banking a').html('Banking (0)')
+        $('#fold-banking a').html('<i class="fa fa-credit-card"></i> Banking (0)')
       }
 
     }
