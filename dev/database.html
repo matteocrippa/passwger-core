@@ -143,9 +143,9 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <form action="#" method="post">
-            
+
             <!-- TODO: Create several version according the folder -->
-            
+
             <div id="form-password" class="modal-body">
               <div class="form-group">
                 <div class="input-group">
@@ -166,11 +166,16 @@
                 </div>
               </div>
             </div>
-            
+
             <!--div id="form-wifi" class="modal-body">
-              
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">SSID</span>
+                  <input id="form-ssid" type="text" class="form-control" placeholder="SSID network name">
+                </div>
+              </div>
             </div-->
-            
+
             <div class="modal-footer clearfix">
 
               <button type="submit" class="btn btn-primary" id="saveEntry"><i class="fa fa-envelope"></i> Save entry</button>
@@ -324,13 +329,13 @@
     function getCurrentFolder(){
 
       $('#folder-menu li').each(function(index, value){
-        
+
         if($(value).hasClass('active')){
-          return $(value).attr('id').replace('fold-','')  
+          return $(value).attr('id').replace('fold-','')
         }
       })
 
-      return 'password'
+      //return 'password'
     }
 
     $('#saveEntry').on('click', function(e){
