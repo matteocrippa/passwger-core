@@ -312,7 +312,12 @@
 
     function getCurrentFolder(){
 
-      // TODO: auto pick currently selected folder
+      $('#folder-menu li').each(function(index, value){
+        
+        if($(value).hasClass('active')){
+          return $(value).attr('id').replace('fold-','')  
+        }
+      })
 
       return 'password'
     }
