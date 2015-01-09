@@ -93,7 +93,7 @@
                     <div class="col-md-3 col-sm-4">
 
                       <!-- compose message btn -->
-                      <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Add new entry</a>
+                      <a id="btn-addnew" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"></a>
 
                       <!-- Navigation - folders-->
                       <div style="margin-top: 15px;">
@@ -268,21 +268,25 @@
     $('#a-password').on('click', function(){
       deselectAllFolder()
       populateList('password')
+      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
     })
 
     $('#a-wifi').on('click', function(){
       deselectAllFolder()
       populateList('wifi')
+      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new wifi')
     })
 
     $('#a-banking').on('click', function(){
       deselectAllFolder()
       populateList('banking')
+      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new banking')
     })
 
     $('#a-identity').on('click', function(){
       deselectAllFolder()
       populateList('identity')
+      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new identity')
     })
 
     $('#a-server').on('click', function(){
