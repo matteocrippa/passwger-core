@@ -328,17 +328,16 @@
 
     function getCurrentFolder(){
 
+      var folderId = 'password'
+
       $('#folder-menu li').each(function(index, value){
 
-        console.log($(value))
-
         if($(value).hasClass('active')){
-          console.log($(value).attr('id'))
-          return $(value).attr('id').replace('fold-','')
+          folderId = $(value).attr('id').toString().replace('fold-','')
         }
       })
 
-      //return 'password'
+      return folderId
     }
 
     $('#saveEntry').on('click', function(e){
