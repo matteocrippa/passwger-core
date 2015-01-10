@@ -78,6 +78,8 @@ $(document).ready(function() {
 
     var currentFolder = getCurrentFolder()
 
+    // TODO: #11 check all required fields are populated before save
+
     switch (currentFolder) {
       case 'password':
 
