@@ -10,14 +10,140 @@ if (!dash.dbExists()) {
 }
 
 $(document).ready(function() {
+
   if (!db) {
     document.title = 'Unlock Database // Passwger'
     $('#unlock-box').removeClass('hide')
   }
 
+  $('#filter-entry').on('keyup', function(){
+    populateList(getCurrentFolder(), $('#filter-entry').val())
+  })
+
+  $('#a-password').on('click', function() {
+    deselectAllFolder()
+    populateList('password')
+    prepareAddEntry('password')
+    $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
+  })
+
+  $('#a-wifi').on('click', function() {
+    deselectAllFolder()
+    populateList('wifi')
+    prepareAddEntry('wifi')
+    $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new wifi')
+  })
+
+  $('#a-ccard').on('click', function() {
+    deselectAllFolder()
+    populateList('ccard')
+    prepareAddEntry('ccard')
+    $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new credit card')
+  })
+
+  $('#a-server').on('click', function() {
+    deselectAllFolder()
+    prepareAddEntry('server')
+    populateList('server')
+    $('#btn-addnew').html('<i class="fa fa-hdd-o"></i> Add new server')
+  })
+
+  $('#unlock').on('click', function() {
+
+    db = dash.openDB($('#password').val())
+
+    if (db.object.settings[0].created) {
+      $('#unlock-box').addClass('hide')
+      $('#database-box').removeClass('hide')
+
+      document.title = 'Database // Passwger'
+
+      populateList('password')
+
+      prepareAddEntry('password')
+
+      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
+
+      showTotItemsFolder()
+
+    } else {
+      $('#unlock-wrongpass').removeClass('hide')
+    }
+
+  })
+
+  $('#saveEntry').on('click', function(e) {
+
+    e.preventDefault()
+
+    var currentFolder = getCurrentFolder()
+
+    switch (currentFolder) {
+      case 'password':
+
+        dash.addEntry(currentFolder, {
+          name: $('#form-password-name').val(),
+          host: $('#form-password-host').val(),
+          username: $('#form-password-username').val(),
+          password: $('#form-password-password').val()
+        })
+
+        $('#form-password-username').val('')
+        $('#form-password-password').val('')
+        $('#form-password-host').val('')
+        $('#form-password-name').val('')
+
+        break
+
+      case 'wifi':
+
+        dash.addEntry(currentFolder, {
+          name: $('#form-wifi-ssid').val(),
+          authmode: $('#form-wifi-authmode').val(),
+          password: $('#form-wifi-password').val()
+        })
+
+        $('#form-wifi-ssid').val('')
+        $('#form-wifi-authmode').val('')
+        $('#form-wifi-password').val('')
+
+        break
+
+      case 'server':
+
+        dash.addEntry(currentFolder, {
+          name: $('#form-server-name').val(),
+          type: $('#form-server-type').val(),
+          host: $('#form-server-host').val(),
+          username: $('#form-server-username').val(),
+          password: $('#form-server-password').val()
+        })
+
+        $('#form-wifi-name').val('')
+        $('#form-wifi-type').val('')
+        $('#form-wifi-host').val('')
+        $('#form-wifi-username').val('')
+        $('#form-wifi-password').val('')
+
+        break
+
+
+      default:
+        break
+    }
+
+    showTotItemsFolder()
+
+    populateList(currentFolder)
+
+    $('#compose-modal').modal('hide')
+  })
+
 })
 
-function populateList(folder) {
+function populateList(folder, filter) {
+
+  filter = populateList.arguments.length<2 ? null : filter;
 
   $('#fold-' + folder).addClass('active')
 
@@ -27,7 +153,13 @@ function populateList(folder) {
 
     if (db(folder).value().length > 0) {
 
-      $.each(db(folder).sortBy('name').value(), function(index, value) {
+      $.each(db(folder).sortBy('name').filter(function(item){
+        if(filter){
+          return item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
+        }else{
+          return true
+        }
+      }).value(), function(index, value) {
 
         var classItem = ""
 
@@ -118,64 +250,6 @@ function prepareAddEntry(folder) {
   $('#form-' + folder).removeClass('hide')
 }
 
-$('#a-password').on('click', function() {
-  deselectAllFolder()
-  populateList('password')
-  prepareAddEntry('password')
-  $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
-})
-
-$('#a-wifi').on('click', function() {
-  deselectAllFolder()
-  populateList('wifi')
-  prepareAddEntry('wifi')
-  $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new wifi')
-})
-
-$('#a-ccard').on('click', function() {
-  deselectAllFolder()
-  populateList('ccard')
-  prepareAddEntry('ccard')
-  $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new credit card')
-})
-
-/*$('#a-identity').on('click', function(){
-deselectAllFolder()
-populateList('identity')
-$('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new identity')
-})*/
-
-$('#a-server').on('click', function() {
-  deselectAllFolder()
-  prepareAddEntry('server')
-  populateList('server')
-  $('#btn-addnew').html('<i class="fa fa-hdd-o"></i> Add new server')
-})
-
-$('#unlock').on('click', function() {
-
-  db = dash.openDB($('#password').val())
-
-  if (db.object.settings[0].created) {
-    $('#unlock-box').addClass('hide')
-    $('#database-box').removeClass('hide')
-
-    document.title = 'Database // Passwger'
-
-    populateList('password')
-
-    prepareAddEntry('password')
-
-    $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
-
-    showTotItemsFolder()
-
-  } else {
-    $('#unlock-wrongpass').removeClass('hide')
-  }
-
-})
-
 function getCurrentFolder() {
 
   var folderId = 'password'
@@ -189,70 +263,3 @@ function getCurrentFolder() {
 
   return folderId
 }
-
-$('#saveEntry').on('click', function(e) {
-
-  e.preventDefault()
-
-  var currentFolder = getCurrentFolder()
-
-  switch (currentFolder) {
-    case 'password':
-
-      dash.addEntry(currentFolder, {
-        name: $('#form-password-name').val(),
-        host: $('#form-password-host').val(),
-        username: $('#form-password-username').val(),
-        password: $('#form-password-password').val()
-      })
-
-      $('#form-password-username').val('')
-      $('#form-password-password').val('')
-      $('#form-password-host').val('')
-      $('#form-password-name').val('')
-
-      break
-
-    case 'wifi':
-
-      dash.addEntry(currentFolder, {
-        name: $('#form-wifi-ssid').val(),
-        authmode: $('#form-wifi-authmode').val(),
-        password: $('#form-wifi-password').val()
-      })
-
-      $('#form-wifi-ssid').val('')
-      $('#form-wifi-authmode').val('')
-      $('#form-wifi-password').val('')
-
-      break
-
-    case 'server':
-
-      dash.addEntry(currentFolder, {
-        name: $('#form-server-name').val(),
-        type: $('#form-server-type').val(),
-        host: $('#form-server-host').val(),
-        username: $('#form-server-username').val(),
-        password: $('#form-server-password').val()
-      })
-
-      $('#form-wifi-name').val('')
-      $('#form-wifi-type').val('')
-      $('#form-wifi-host').val('')
-      $('#form-wifi-username').val('')
-      $('#form-wifi-password').val('')
-
-      break
-
-
-    default:
-      break
-  }
-
-  showTotItemsFolder()
-
-  populateList(currentFolder)
-
-  $('#compose-modal').modal('hide')
-})
