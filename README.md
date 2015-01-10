@@ -1,4 +1,8 @@
 # Passwger
+Status: Pre-alpha
+
+Issues: [![Issues](https://img.shields.io/github/issues/passwger/passwger-core.svg?style=flat)](https://github.com/passwger/passwger-core/issues)
+
 _A cross-platform password manager._
 
 ## Introduction
