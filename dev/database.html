@@ -330,7 +330,10 @@
 
       $('#folder-menu li').each(function(index, value){
 
+        console.log($(value))
+
         if($(value).hasClass('active')){
+          console.log($(value).attr('id'))
           return $(value).attr('id').replace('fold-','')
         }
       })
