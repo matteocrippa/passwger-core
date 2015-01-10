@@ -7,10 +7,14 @@ var db = null
 
 dash.openDB = function(pwd) {
 
-  db = low(localStorage.getItem('database'), {
-    encrypt: true,
-    passkey: pwd
-  })
+  try{
+    db = low(localStorage.getItem('database'), {
+      encrypt: true,
+      passkey: pwd
+    })
+  }catch(ex){
+    return false
+  }
 
   return db
 

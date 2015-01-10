@@ -52,6 +52,11 @@ $(document).ready(function() {
 
     db = dash.openDB($('#password').val())
 
+    if(db == false){
+      alert('Wrong password')
+      return
+    }
+
     if (db.object.settings[0].created) {
       $('#unlock-box').addClass('hide')
       $('#database-box').removeClass('hide')
