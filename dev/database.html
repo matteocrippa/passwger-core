@@ -12,32 +12,10 @@
   <!-- Theme style -->
   <link href="assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
-  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.min.js" type="text/javascript"></script>
 
-  <script type="text/javascript" src="controller/index.js"></script>
-  <script type="text/javascript" src="controller/database.js"></script>
-  <script type="text/javascript">
-
-  var db = null
-
-  if (!localStorage.getItem('database')){
-    location.href = 'setup.html'
-  }
-
-  if(!dash.dbExists()){
-    localStorage.removeItem('database')
-    location.href = 'setup.html'
-  }
-
-  $(document).ready(function(){
-    if(!db){
-      document.title = 'Unlock Database // Passwger'
-      $('#unlock-box').removeClass('hide')
-    }
-
-  })
-
-  </script>
+  <script src="controller/index.js" type="text/javascript"></script>
+  <script src="controller/database.js" type="text/javascript"></script>
 </head>
 
 <body class="bg-black">
@@ -69,8 +47,12 @@
     <!-- /.lockscreen-item -->
 
     <div class="lockscreen-link">
-      <label class="control-label hide" for="password" id="unlock-wrongpass"><i class="fa fa-times-circle-o"></i> Wrong Password<br/></label>
-      Please insert your database password to unlock it.
+      <label class="control-label hide" for="password" id="unlock-wrongpass"><i class="fa fa-times-circle-o"></i> Wrong Password
+        <br/>
+      </label>
+      <p style="color: #f9f9f9 !important;">
+        Please insert your database password to unlock it.
+      </p>
     </div>
   </div>
 
@@ -80,7 +62,7 @@
       <!-- Left side column. contains the logo and sidebar -->
 
       <!-- Right side column. Contains the navbar and content of the page -->
-      <aside >
+      <aside>
 
         <!-- Main content -->
         <section class="content" style="height: 600px;">
@@ -99,14 +81,19 @@
                       <div style="margin-top: 15px;">
                         <ul class="nav nav-pills nav-stacked" id="folder-menu">
                           <li class="header">Folders</li>
-                          <li id="fold-password" class="active"><a id="a-password" href="#"><i class="fa fa-key"></i> Password</a></li>
-                          <li id="fold-server"><a id="a-server" href="#"><i class="fa fa-hdd-o"></i> Server</a></li>
-                          <li id="fold-wifi"><a id="a-wifi" href="#"><i class="fa fa-rss"></i> Wi-Fi</a></li>
-                          <li id="fold-banking"><a id="a-banking" href="#"><i class="fa fa-credit-card"></i> Banking</a></li>
-                          <li id="fold-identity"><a id="a-identity" href="#"><i class="fa fa-male"></i> Identity</a></li>
+                          <li id="fold-password" class="active"><a id="a-password" href="#"><i class="fa fa-key"></i> Password</a>
+                          </li>
+                          <li id="fold-server"><a id="a-server" href="#"><i class="fa fa-hdd-o"></i> Server</a>
+                          </li>
+                          <li id="fold-wifi"><a id="a-wifi" href="#"><i class="fa fa-rss"></i> Wi-Fi</a>
+                          </li>
+                          <li id="fold-ccard"><a id="a-ccard" href="#"><i class="fa fa-credit-card"></i> Credit Card</a>
+                          </li>
+                          <!--li id="fold-identity"><a id="a-identity" href="#"><i class="fa fa-male"></i> Identity</a></li-->
                         </ul>
                       </div>
-                    </div><!-- /.col (LEFT) -->
+                    </div>
+                    <!-- /.col (LEFT) -->
                     <div class="col-md-9 col-sm-8">
                       <div class="row pad">
                         <div class="col-sm-12 search-form">
@@ -114,29 +101,40 @@
                             <div class="input-group">
                               <input type="text" class="form-control input-sm" placeholder="Search">
                               <div class="input-group-btn">
-                                <button type="submit" name="q" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                <button type="submit" name="q" class="btn btn-sm btn-primary"><i class="fa fa-search"></i>
+                                </button>
                               </div>
                             </div>
                           </form>
                         </div>
-                      </div><!-- /.row -->
+                      </div>
+                      <!-- /.row -->
 
                       <div class="table-responsive">
                         <!-- THE MESSAGES -->
                         <table class="table table-mailbox" id="password-list">
                         </table>
-                      </div><!-- /.table-responsive -->
-                    </div><!-- /.col (RIGHT) -->
-                  </div><!-- /.row -->
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div><!-- /.col (MAIN) -->
+                      </div>
+                      <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.col (RIGHT) -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+            <!-- /.col (MAIN) -->
           </div>
           <!-- MAILBOX END -->
 
-        </section><!-- /.content -->
-      </aside><!-- /.right-side -->
-    </div><!-- ./wrapper -->
+        </section>
+        <!-- /.content -->
+      </aside>
+      <!-- /.right-side -->
+    </div>
+    <!-- ./wrapper -->
 
     <!-- COMPOSE MESSAGE MODAL -->
     <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -144,37 +142,146 @@
         <div class="modal-content">
           <form action="#" method="post">
 
-            <!-- TODO: Create several version according the folder -->
-
-            <div id="form-password" class="modal-body">
+            <div id="form-password" class="modal-body hide">
+              <p class="lead">Add new Password</p>
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon">Website:</span>
-                  <input id="form-name" type="text" class="form-control" placeholder="Domain">
+                  <span class="input-group-addon">Name:</span>
+                  </span>
+                  <input id="form-password-name" type="text" class="form-control" placeholder="Common name">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Host:</span>
+                  </span>
+                  <input id="form-password-host" type="text" class="form-control" placeholder="http://">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Username:</span>
-                  <input id="form-username" type="email" class="form-control" placeholder="Username">
+                  <input id="form-password-username" type="email" class="form-control" placeholder="Username">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Password:</span>
-                  <input id="form-password" type="password" class="form-control" placeholder="Password">
+                  <input id="form-password-password" type="password" class="form-control" placeholder="Password">
                 </div>
               </div>
             </div>
 
-            <!--div id="form-wifi" class="modal-body">
+            <div id="form-wifi" class="modal-body hide">
+              <p class="lead">Add new Wi-Fi</p>
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon">SSID</span>
-                  <input id="form-ssid" type="text" class="form-control" placeholder="SSID network name">
+                  <span class="input-group-addon">SSID Name</span>
+                  <input id="form-wifi-ssid" type="text" class="form-control" placeholder="SSID network name">
                 </div>
               </div>
-            </div-->
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Authentication Method</span>
+                  <select id="form-wifi-authmode" class="form-control">
+                    <option></option>
+                    <option value="WEP">WEP</option>
+                    <option value="WPA">WPA</option>
+                    <option value="WPA2">WPA2</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Password</span>
+                  <input id="form-wifi-password" type="password" class="form-control" placeholder="SSID network name">
+                </div>
+              </div>
+            </div>
+
+            <div id="form-server" class="modal-body hide">
+              <p class="lead">Add new Server</p>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Name</span>
+                  <input id="form-server-name" type="text" class="form-control" placeholder="Server name">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Server type</span>
+                  <select id="form-server-type" class="form-control">
+                    <option></option>
+                    <option value="FTP">FTP</option>
+                    <option value="SFTP">SFTP</option>
+                    <option value="SSH">SSH</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Host</span>
+                  <input id="form-server-host" type="text" class="form-control" placeholder="Host/IP">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Username</span>
+                  <input id="form-server-username" type="text" class="form-control" placeholder="Username">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Password</span>
+                  <input id="form-server-password" type="password" class="form-control" placeholder="SSID network name">
+                </div>
+              </div>
+            </div>
+
+            <div id="form-ccard" class="modal-body hide">
+              <p class="lead">Add new Credit Card</p>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Name</span>
+                  <input id="form-wifi-name" type="text" class="form-control" placeholder="Give a name to your card">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Type</span>
+                  <select id="form-ccard-type" class="form-control">
+                    <option></option>
+                    <option value="Visa">Visa</option>
+                    <option value="Master Card">Master Card</option>
+                    <option value="American Express">American Express</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Number</span>
+                  <input id="form-ccard-number" type="text" class="form-control" placeholder="Number">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Security code</span>
+                  <input id="form-ccard-password" type="password" class="form-control" placeholder="Security code">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Expiry Date</span>
+                  <input id="form-ccard-expiry" type="text" class="form-control" placeholder="SSID network name">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Cardholder</span>
+                  <input id="form-ccard-cardholder" type="text" class="form-control" placeholder="Cardholder name and surname">
+                </div>
+              </div>
+            </div>
 
             <div class="modal-footer clearfix">
 
@@ -183,189 +290,19 @@
 
             </div>
           </form>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- AdminLTE App -->
-    <script src="assets/js/app.js" type="text/javascript"></script>
-
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    
   </div>
 
+  <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-  <!-- jQuery 2.0.2 -->
-  <script type="text/javascript">
-
-    function populateList(folder){
-
-      $('#fold-'+folder).addClass('active')
-
-      $('#password-list').children().children().remove()
-
-      if(db(folder)){
-
-        if(db(folder).value().length > 0){
-
-          $.each(db(folder).sortBy('name').value(), function(index, value){
-
-            var classItem = ""
-
-            if(index%2==0){
-              classItem = "class='unread'"
-            }
-
-            var item = "<tr "+classItem+"> \
-            <td class='small-col'><div class='domain-icon' style='background-image: url('assets/img/placeholder-icon.png');'></div></td> \
-            <td class='name'><a href='#'>"+value.name+"</a></td> \
-            </tr>"
-
-            $('#password-list').append(item)
-
-          })
-        }else{
-          $('#password-list').append('<tr><td class="name">No items stored yet.</td></tr>')
-        }
-
-
-      }else{
-        $('#password-list').append('<tr><td class="name">No items stored yet.</td></tr>')
-      }
-
-    }
-
-    function showTotItemsFolder(){
-
-      if(db.object.password){
-        $('#fold-password a').html('<i class="fa fa-key"></i> Password ('+db.object.password.length+')')
-      }else{
-        $('#fold-password a').html('<i class="fa fa-key"></i> Password (0)')
-      }
-
-      if(db.object.wifi){
-        $('#fold-wifi a').html('<i class="fa fa-rss"></i> Wi-Fi ('+db.object.wifi.length+')')
-      }else{
-        $('#fold-wifi a').html('<i class="fa fa-rss"></i> Wi-Fi (0)')
-      }
-
-      if(db.object.server){
-        $('#fold-server a').html('<i class="fa fa-hdd-o"></i> Server ('+db.object.server.length+')')
-      }else{
-        $('#fold-server a').html('<i class="fa fa-hdd-o"></i> Server (0)')
-      }
-
-      if(db.object.identity){
-        $('#fold-identity a').html('<i class="fa fa-male"></i> Identity ('+db.object.identity.length+')')
-      }else{
-        $('#fold-identity a').html('<i class="fa fa-male"></i> Identity (0)')
-      }
-
-      if(db.object.banking){
-        $('#fold-banking a').html('<i class="fa fa-credit-card"></i> Banking ('+db.object.banking.length+')')
-      }else{
-        $('#fold-banking a').html('<i class="fa fa-credit-card"></i> Banking (0)')
-      }
-
-    }
-
-    function deselectAllFolder(){
-
-      $('#folder-menu li').each(function(index, value){
-        $(value).removeClass('active')
-      })
-
-    }
-
-    $('#a-password').on('click', function(){
-      deselectAllFolder()
-      populateList('password')
-      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
-    })
-
-    $('#a-wifi').on('click', function(){
-      deselectAllFolder()
-      populateList('wifi')
-      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new wifi')
-    })
-
-    $('#a-banking').on('click', function(){
-      deselectAllFolder()
-      populateList('banking')
-      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new banking')
-    })
-
-    $('#a-identity').on('click', function(){
-      deselectAllFolder()
-      populateList('identity')
-      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new identity')
-    })
-
-    $('#a-server').on('click', function(){
-      deselectAllFolder()
-      populateList('server')
-    })
-
-    $('#unlock').on('click', function(){
-
-      db = dash.openDB($('#password').val())
-
-      if(db.object.settings[0].created){
-        $('#unlock-box').addClass('hide')
-        $('#database-box').removeClass('hide')
-
-        document.title = 'Database // Passwger'
-
-        populateList('password')
-
-        $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
-
-        showTotItemsFolder()
-
-      }else{
-        $('#unlock-wrongpass').removeClass('hide')
-      }
-
-    })
-
-    function getCurrentFolder(){
-
-      var folderId = 'password'
-
-      $('#folder-menu li').each(function(index, value){
-
-        if($(value).hasClass('active')){
-          folderId = $(value).attr('id').toString().replace('fold-','')
-        }
-      })
-
-      return folderId
-    }
-
-    $('#saveEntry').on('click', function(e){
-
-      e.preventDefault()
-
-      var currentFolder = getCurrentFolder()
-
-      dash.addEntry(currentFolder,{
-        name: $('#form-name').val(),
-        username: $('#form-username').val(),
-        password: $('#form-password').val()
-      })
-
-      $('#form-username').val('')
-      $('#form-password').val('')
-      $('#form-domain').val('')
-
-      showTotItemsFolder()
-
-      populateList(currentFolder)
-
-      $('#compose-modal').modal('hide')
-    })
-
-  </script>
+  <script src="assets/js/app.js" type="text/javascript"></script>
+  <script src="assets/js/database.js" type="text/javascript"></script>
 
 </body>
 

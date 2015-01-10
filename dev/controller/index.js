@@ -2,6 +2,6 @@ window.dash = window.dash || {}
 
 var fs = require('fs')
 
-dash.dbExists = function(){
+dash.dbExists = function() {
   return fs.existsSync(localStorage.getItem('database'))
 }

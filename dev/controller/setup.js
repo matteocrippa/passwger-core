@@ -2,7 +2,7 @@ window.dash = window.dash || {}
 
 var low = require('lowdb')
 
-dash.setupDB = function(path, pwd){
+dash.setupDB = function(path, pwd) {
 
   var db = low(path, {
     encrypt: true,

@@ -5,7 +5,7 @@ low.mixin(require('underscore-db'))
 
 var db = null
 
-dash.openDB = function(pwd){
+dash.openDB = function(pwd) {
 
   db = low(localStorage.getItem('database'), {
     encrypt: true,
@@ -16,7 +16,7 @@ dash.openDB = function(pwd){
 
 }
 
-dash.addEntry = function(type,entry){
+dash.addEntry = function(type, entry) {
 
   return db(type).push(entry).value().id
 

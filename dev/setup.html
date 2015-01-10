@@ -2,58 +2,57 @@
 <html class="bg-black">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Database setup // Passwger</title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- bootstrap 3.0.2 -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- font Awesome -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <title>Database setup // Passwger</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <!-- bootstrap 3.0.2 -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- font Awesome -->
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <!-- Theme style -->
+  <link href="assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" src="controller/setup.js"></script>
-    <script type="text/javascript">
-    if (localStorage.getItem('database')){
+  <script type="text/javascript" src="controller/setup.js"></script>
+  <script type="text/javascript">
+    if (localStorage.getItem('database')) {
       location.href = 'database.html';
     }
-    </script>
+  </script>
 </head>
 
 <body class="bg-black">
 
-    <div class="form-box" id="login-box">
-        <div class="logo-small"></div>
-        <div class="header">Database setup</div>
-        <form action="setup.html" method="post">
-            <div class="body bg-gray">
-                <div class="form-group has-error">
-                    <label class="control-label hide" id="form-val"><i class="fa fa-times-circle-o"></i> Please fill the form completely to continue</label>
-                </div>
+  <div class="form-box" id="login-box">
+    <div class="logo-small"></div>
+    <div class="header">Database setup</div>
+    <form action="setup.html" method="post">
+      <div class="body bg-gray">
+        <div class="form-group has-error">
+          <label class="control-label hide" id="form-val"><i class="fa fa-times-circle-o"></i> Please fill the form completely to continue</label>
+        </div>
 
-                <div class="form-group has-error">
-                    <label class="control-label hide" for="pwdfile"><i class="fa fa-times-circle-o"></i> Required</label>
-                    <label class="has-info">Choose where to store your db:</label>
-                    <input id="pwdfile" type="file" nwsaveas="grimorio.pwger"/>
-                </div>
+        <div class="form-group has-error">
+          <label class="control-label hide" for="pwdfile"><i class="fa fa-times-circle-o"></i> Required</label>
+          <label class="has-info">Choose where to store your db:</label>
+          <input id="pwdfile" type="file" nwsaveas="grimorio.pwger" />
+        </div>
 
-                <div class="form-group has-error">
-                    <label class="control-label hide" for="password"><i class="fa fa-times-circle-o"></i> Required</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Database Password" />
-                </div>
-            </div>
-            <div class="footer">
-              <button type="button" id="login" class="btn bg-olive btn-block">Save and proceed</button>
-            </div>
+        <div class="form-group has-error">
+          <label class="control-label hide" for="password"><i class="fa fa-times-circle-o"></i> Required</label>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Database Password" />
+        </div>
+      </div>
+      <div class="footer">
+        <button type="button" id="login" class="btn bg-olive btn-block">Save and proceed</button>
+      </div>
 
-        </form>
-    </div>
+    </form>
+  </div>
 
-    <!-- jQuery 2.0.2 -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script type="text/javascript">
-
-    $('#pwdfile').on('click', function(){
+  <!-- jQuery 2.0.2 -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script type="text/javascript">
+    $('#pwdfile').on('click', function() {
       var $this = $(this)
       $this.change(function(evt) {
         //console.log($(this).val())
@@ -61,40 +60,40 @@
     })
 
     $('#password').on('blur', function() {
-        var $this = $(this);
-        if ($this.val().trim().length < 1) {
-            $this.prev().removeClass('hide');
-            return false;
-        } else {
-            $this.prev().addClass('hide');
-            return true;
-        }
+      var $this = $(this);
+      if ($this.val().trim().length < 1) {
+        $this.prev().removeClass('hide');
+        return false;
+      } else {
+        $this.prev().addClass('hide');
+        return true;
+      }
     });
 
     function triggerFormVal() {
-        if ($('#pwdfile').val().length > 0 && $('#password').val().trim().length > 0) {
-            return true;
-        } else {
-            $('#pwdfile,#password').trigger('blur');
-            return false;
-        }
+      if ($('#pwdfile').val().length > 0 && $('#password').val().trim().length > 0) {
+        return true;
+      } else {
+        $('#pwdfile,#password').trigger('blur');
+        return false;
+      }
     }
 
     $('#login').on('click', function() {
-        if (triggerFormVal()) {
-            $('#form-val').addClass('hide');
+      if (triggerFormVal()) {
+        $('#form-val').addClass('hide');
 
-            localStorage.setItem('database', $('#pwdfile').val())
+        localStorage.setItem('database', $('#pwdfile').val())
 
-            dash.setupDB($('#pwdfile').val(), $('#password').val())
+        dash.setupDB($('#pwdfile').val(), $('#password').val())
 
-            location.href = 'database.html'
+        location.href = 'database.html'
 
-        } else {
-            $('#form-val').removeClass('hide');
-        }
+      } else {
+        $('#form-val').removeClass('hide');
+      }
     });
-    </script>
+  </script>
 
 </body>
 
