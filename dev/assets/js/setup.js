@@ -1,8 +1,8 @@
-if (localStorage.getItem('database')) {
-  location.href = '../routers/database.html';
-}
-
 (function() {
+
+  if (localStorage.getItem('database')) {
+    location.href = '../routers/database.html';
+  }
 
   var app = angular.module('setup', ['file-model'])
 
@@ -19,11 +19,11 @@ if (localStorage.getItem('database')) {
 
       if (!setup.pwdfile) {
         setup.error = "You must select where to store your db!"
-      }else if (!setup.password) {
+      } else if (!setup.password) {
         setup.error = "You must setup a password for lock your db!"
-      }else if (setup.password.length < 4) {
+      } else if (setup.password.length < 4) {
         setup.error = "Password must be, at least, 4 chars long!"
-      }else{
+      } else {
         localStorage.setItem('database', setup.pwdfile.path)
 
         dash.setupDB(setup.pwdfile.path, setup.password)
