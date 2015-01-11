@@ -140,7 +140,7 @@
         <div class="modal-content">
           <form action="#" method="post">
 
-            <div id="form-password" class="modal-body hide">
+            <div id="form-password" class="modal-body" ng-show="dbc.isCurrentFolder('password')">
               <p class="lead">Add new Password</p>
               <div class="form-group">
                 <div class="input-group">
@@ -170,7 +170,7 @@
               </div>
             </div>
 
-            <div id="form-wifi" class="modal-body hide">
+            <div id="form-wifi" class="modal-body" ng-show="dbc.isCurrentFolder('wifi')">
               <p class="lead">Add new Wi-Fi</p>
               <div class="form-group">
                 <div class="input-group">
@@ -197,7 +197,7 @@
               </div>
             </div>
 
-            <div id="form-server" class="modal-body hide">
+            <div id="form-server" class="modal-body" ng-show="dbc.isCurrentFolder('server')">
               <p class="lead">Add new Server</p>
               <div class="form-group">
                 <div class="input-group">
@@ -236,7 +236,7 @@
               </div>
             </div>
 
-            <div id="form-ccard" class="modal-body hide">
+            <div id="form-ccard" class="modal-body" ng-show="dbc.isCurrentFolder('ccard')">
               <p class="lead">Add new Credit Card</p>
               <div class="form-group">
                 <div class="input-group">
