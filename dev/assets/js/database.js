@@ -16,6 +16,7 @@
     var dbc = this
 
     dbc.db = null
+    dbc.table = null
     dbc.currentFolder = 'password'
     dbc.locked = true
 
@@ -35,7 +36,11 @@
         dbc.locked = false
 
         $window.document.title = 'Database // Passwger'
-
+        
+        if(dbc.db('password')) {
+          dbc.totPassword = dbc.db('password').length
+        }
+        
         /*populateList('password')
 
         prepareAddEntry('password')
@@ -65,6 +70,11 @@
     dbc.selectFolder = function(fold) {
       //$log.log(fold)
       dbc.currentFolder = fold
+      dbc.table = db(fold).value()
+    }
+    
+    dbc.filterEntry = function() {
+      
     }
 
   }])
