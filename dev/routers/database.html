@@ -79,9 +79,9 @@
                       <div style="margin-top: 15px;">
                         <ul class="nav nav-pills nav-stacked" id="folder-menu">
                           <li class="header">Folders</li>
-                          <li id="fold-password" ng-class="{ 'active' : dbc.isCurrentFolder('password') }"><a href ng-click="dbc.selectFolder('password')"><i class="fa fa-key"></i> Password</a>
+                          <li id="fold-password" ng-class="{ 'active' : dbc.isCurrentFolder('password') }"><a href ng-click="dbc.selectFolder('password')" ng-init="dbc.totPassword=0"><i class="fa fa-key"></i> Password {{dbc.totPassword}}</a>
                           </li>
-                          <li id="fold-server" ng-class="{ 'active' : dbc.isCurrentFolder('server') }"><a href id="a-server" ng-click="dbc.selectFolder('server')"><i class="fa fa-hdd-o"></i> Server</a>
+                          <li id="fold-server" ng-class="{ 'active' : dbc.isCurrentFolder('server') }"><a href id="a-server" ng-click="dbc.selectFolder('server')" ng-init="dbc.totServer=0"><i class="fa fa-hdd-o"></i> Server {{dbc.totServer}}</a>
                           </li>
                           <li id="fold-wifi" ng-class="{ 'active' : dbc.isCurrentFolder('wifi') }"><a href id="a-wifi" ng-click="dbc.selectFolder('wifi')"><i class="fa fa-rss"></i> Wi-Fi</a>
                           </li>
@@ -97,7 +97,7 @@
                         <div class="col-sm-12 search-form">
                           <form action="#" class="text-right">
                             <div class="input-group">
-                              <input id="filter-entry" type="text" class="form-control input-sm" placeholder="Search">
+                              <input id="filter-entry" type="text" class="form-control input-sm" placeholder="Search" ng-model="dbc.filter" ng-keyup="dbc.filterEntry()">
                               <div class="input-group-btn">
                                 <button type="submit" name="q" class="btn btn-sm btn-primary" disabled="disabled"><i class="fa fa-search"></i>
                                 </button>
