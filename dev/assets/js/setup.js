@@ -2,44 +2,37 @@ if (localStorage.getItem('database')) {
   location.href = '../routers/database.html';
 }
 
-$('#pwdfile').on('click', function() {
-  var $this = $(this)
-  $this.change(function(evt) {
-    //console.log($(this).val())
-  })
-})
+(function() {
 
-$('#password').on('blur', function() {
-  var $this = $(this);
-  if ($this.val().trim().length < 1) {
-    $this.prev().removeClass('hide');
-    return false;
-  } else {
-    $this.prev().addClass('hide');
-    return true;
-  }
-});
+  var app = angular.module('setup', ['file-model'])
 
-function triggerFormVal() {
-  if ($('#pwdfile').val().length > 0 && $('#password').val().trim().length > 0) {
-    return true;
-  } else {
-    $('#pwdfile,#password').trigger('blur');
-    return false;
-  }
-}
+  app.controller('SetupController', ['$log', '$window', function($log, $window) {
 
-$('#login').on('click', function() {
-  if (triggerFormVal()) {
-    $('#form-val').addClass('hide');
+    this.error = ""
 
-    localStorage.setItem('database', $('#pwdfile').val())
+    var setup = this
 
-    dash.setupDB($('#pwdfile').val(), $('#password').val())
+    setup.createDb = function() {
 
-    location.href = 'database.html'
+      //$log.log(setup.pwdfile)
+      //$log.log(setup.password)
 
-  } else {
-    $('#form-val').removeClass('hide');
-  }
-});
+      if (!setup.pwdfile) {
+        setup.error = "You must select where to store your db!"
+      }else if (!setup.password) {
+        setup.error = "You must setup a password for lock your db!"
+      }else if (setup.password.length < 4) {
+        setup.error = "Password must be, at least, 4 chars long!"
+      }else{
+        localStorage.setItem('database', setup.pwdfile.path)
+
+        dash.setupDB(setup.pwdfile.path, setup.password)
+
+        $window.location.href = '../routers/database.html'
+      }
+
+    }
+
+  }])
+
+})()
