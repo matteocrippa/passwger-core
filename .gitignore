@@ -33,3 +33,7 @@ cache
 
 # Passwger local Database file
 *.pwger
+
+# Bower libs
+assets/js/libs
+libs
