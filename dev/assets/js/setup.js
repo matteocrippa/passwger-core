@@ -1,5 +1,5 @@
 if (localStorage.getItem('database')) {
-  location.href = 'database.html';
+  location.href = '../routers/database.html';
 }
 
 $('#pwdfile').on('click', function() {

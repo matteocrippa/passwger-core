@@ -3067,7 +3067,7 @@ Component: timeline
   background-color: #ffffff;
 }
 .logo-small {
-  background: url("../img/passwger-logo.png") no-repeat;
+  background: url("../../assets/img/passwger-logo.png") no-repeat;
   background-size: cover;
   height: 128px;
   width: 128px;

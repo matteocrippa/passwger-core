@@ -2,7 +2,7 @@
   "name": "Passwger",
   "version": "0.0.1",
   "description": "A crossplatform password manager",
-  "main": "index.html",
+  "main": "routers/index.html",
   "dependencies": {
     "express": "^4.10.6",
     "lowdb": "matteocrippa/lowdb",

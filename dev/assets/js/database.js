@@ -1,12 +1,12 @@
 var db = null
 
 if (!localStorage.getItem('database')) {
-  location.href = 'setup.html'
+  location.href = '../routers/setup.html'
 }
 
 if (!dash.dbExists()) {
   localStorage.removeItem('database')
-  location.href = 'setup.html'
+  location.href = '../routers/setup.html'
 }
 
 $(document).ready(function() {
