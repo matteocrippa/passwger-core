@@ -1,13 +1,65 @@
+(function() {
+
+  if (!localStorage.getItem('database')) {
+    location.href = '../routers/setup.html'
+  }
+
+  if (!dash.dbExists()) {
+    localStorage.removeItem('database')
+    location.href = '../routers/setup.html'
+  }
+
+  var app = angular.module('database', [])
+
+  app.controller('DatabaseController', ['$log', '$window', function($log, $window) {
+
+    var dbc = this
+
+    var db = null
+
+    dbc.locked = true
+    $window.document.title = 'Unlock Database // Passwger'
+
+    dbc.unlockDb = function() {
+
+      db = dash.openDB(dbc.password)
+
+      if(db == false){
+        alert('Error: wrong unlock password.')
+        return
+      }
+
+      if (db.object.settings[0].created) {
+
+        dbc.locked = false
+
+        $window.document.title = 'Database // Passwger'
+
+        /*populateList('password')
+
+        prepareAddEntry('password')
+
+        $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
+
+        showTotItemsFolder()*/
+
+      } else {
+        dbc.locked = true
+      }
+    }
+
+    dbc.saveEntry = function() {
+      
+    }
+
+  }])
+
+})()
+
+
 var db = null
 
-if (!localStorage.getItem('database')) {
-  location.href = '../routers/setup.html'
-}
 
-if (!dash.dbExists()) {
-  localStorage.removeItem('database')
-  location.href = '../routers/setup.html'
-}
 
 $(document).ready(function() {
 
@@ -46,35 +98,6 @@ $(document).ready(function() {
     prepareAddEntry('server')
     populateList('server')
     $('#btn-addnew').html('<i class="fa fa-hdd-o"></i> Add new server')
-  })
-
-  $('#unlock').on('click', function() {
-
-    db = dash.openDB($('#password').val())
-
-    if(db == false){
-      alert('Wrong password')
-      return
-    }
-
-    if (db.object.settings[0].created) {
-      $('#unlock-box').addClass('hide')
-      $('#database-box').removeClass('hide')
-
-      document.title = 'Database // Passwger'
-
-      populateList('password')
-
-      prepareAddEntry('password')
-
-      $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
-
-      showTotItemsFolder()
-
-    } else {
-      $('#unlock-wrongpass').removeClass('hide')
-    }
-
   })
 
   $('#saveEntry').on('click', function(e) {

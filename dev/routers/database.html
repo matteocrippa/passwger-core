@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-black">
+<html class="bg-black" ng-app="database">
 
 <head>
   <meta charset="UTF-8">
@@ -13,14 +13,15 @@
   <link href="../assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
   <script src="../assets/js/libs/jquery/dist/jquery.min.js" type="text/javascript"></script>
+  <script src="../assets/js/libs/angular/angular.min.js" type="text/javascript"></script>
 
   <script src="../controller/index.js" type="text/javascript"></script>
   <script src="../controller/database.js" type="text/javascript"></script>
 </head>
 
-<body class="bg-black">
+<body class="bg-black" ng-controller="DatabaseController as dbc">
 
-  <div class="form-box hide" id="unlock-box">
+  <div class="form-box" id="unlock-box" ng-show="dbc.locked">
 
     <!-- START LOCK SCREEN ITEM -->
     <div class="lockscreen-item">
@@ -34,9 +35,9 @@
       <div class="lockscreen-credentials">
 
         <div class="input-group">
-          <input type="password" class="form-control" id="password" placeholder="password" />
+          <input type="password" class="form-control" id="password" placeholder="password" ng-model="dbc.password" />
           <div class="input-group-btn">
-            <button class="btn btn-flat" id="unlock"><i class="fa fa-arrow-right text-muted"></i>
+            <button class="btn btn-flat" id="unlock" ng-click="dbc.unlockDb()"><i class="fa fa-arrow-right text-muted"></i>
             </button>
           </div>
         </div>
@@ -56,7 +57,7 @@
     </div>
   </div>
 
-  <div id="database-box" class="hide">
+  <div id="database-box" ng-hide="dbc.locked">
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
       <!-- Left side column. contains the logo and sidebar -->
