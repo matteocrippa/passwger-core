@@ -15,21 +15,22 @@
 
     var dbc = this
 
-    var db = null
-
+    dbc.db = null
+    dbc.currentFolder = 'password'
     dbc.locked = true
+
     $window.document.title = 'Unlock Database // Passwger'
 
     dbc.unlockDb = function() {
 
-      db = dash.openDB(dbc.password)
+      dbc.db = dash.openDB(dbc.password)
 
-      if(db == false){
+      if (dbc.db == false) {
         alert('Error: wrong unlock password.')
         return
       }
 
-      if (db.object.settings[0].created) {
+      if (dbc.db.object.settings[0].created) {
 
         dbc.locked = false
 
@@ -49,7 +50,21 @@
     }
 
     dbc.saveEntry = function() {
-      
+
+    }
+
+    dbc.isCurrentFolder = function(fold) {
+      //$log.log('check '+fold)
+      if (fold == dbc.currentFolder) {
+        return true
+      }else{
+        return false
+      }
+    }
+
+    dbc.selectFolder = function(fold) {
+      //$log.log(fold)
+      dbc.currentFolder = fold
     }
 
   }])
@@ -68,11 +83,11 @@ $(document).ready(function() {
     $('#unlock-box').removeClass('hide')
   }
 
-  $('#filter-entry').on('keyup', function(){
+  $('#filter-entry').on('keyup', function() {
     populateList(getCurrentFolder(), $('#filter-entry').val())
   })
 
-  $('#a-password').on('click', function() {
+  /*$('#a-password').on('click', function() {
     deselectAllFolder()
     populateList('password')
     prepareAddEntry('password')
@@ -98,7 +113,7 @@ $(document).ready(function() {
     prepareAddEntry('server')
     populateList('server')
     $('#btn-addnew').html('<i class="fa fa-hdd-o"></i> Add new server')
-  })
+  })*/
 
   $('#saveEntry').on('click', function(e) {
 
@@ -173,7 +188,7 @@ $(document).ready(function() {
 
 function populateList(folder, filter) {
 
-  filter = populateList.arguments.length<2 ? null : filter;
+  filter = populateList.arguments.length < 2 ? null : filter;
 
   $('#fold-' + folder).addClass('active')
 
@@ -183,10 +198,10 @@ function populateList(folder, filter) {
 
     if (db(folder).value().length > 0) {
 
-      $.each(db(folder).sortBy('name').filter(function(item){
-        if(filter){
+      $.each(db(folder).sortBy('name').filter(function(item) {
+        if (filter) {
           return item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-        }else{
+        } else {
           return true
         }
       }).value(), function(index, value) {

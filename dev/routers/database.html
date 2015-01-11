@@ -82,13 +82,13 @@
                       <div style="margin-top: 15px;">
                         <ul class="nav nav-pills nav-stacked" id="folder-menu">
                           <li class="header">Folders</li>
-                          <li id="fold-password" class="active"><a id="a-password" href="#"><i class="fa fa-key"></i> Password</a>
+                          <li id="fold-password" ng-class="{ 'active' : dbc.isCurrentFolder('password') }"><a href ng-click="dbc.selectFolder('password')"><i class="fa fa-key"></i> Password</a>
                           </li>
-                          <li id="fold-server"><a id="a-server" href="#"><i class="fa fa-hdd-o"></i> Server</a>
+                          <li id="fold-server" ng-class="{ 'active' : dbc.isCurrentFolder('server') }"><a href id="a-server" ng-click="dbc.selectFolder('server')"><i class="fa fa-hdd-o"></i> Server</a>
                           </li>
-                          <li id="fold-wifi"><a id="a-wifi" href="#"><i class="fa fa-rss"></i> Wi-Fi</a>
+                          <li id="fold-wifi" ng-class="{ 'active' : dbc.isCurrentFolder('wifi') }"><a href id="a-wifi" ng-click="dbc.selectFolder('wifi')"><i class="fa fa-rss"></i> Wi-Fi</a>
                           </li>
-                          <li id="fold-ccard"><a id="a-ccard" href="#"><i class="fa fa-credit-card"></i> Credit Card</a>
+                          <li id="fold-ccard" ng-class="{ 'active' : dbc.isCurrentFolder('ccard') }"><a href id="a-ccard" ng-click="dbc.selectFolder('ccard')"><i class="fa fa-credit-card"></i> Credit Card</a>
                           </li>
                           <!--li id="fold-identity"><a id="a-identity" href="#"><i class="fa fa-male"></i> Identity</a></li-->
                         </ul>
