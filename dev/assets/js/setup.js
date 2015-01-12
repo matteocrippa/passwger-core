@@ -4,35 +4,33 @@
     location.href = '../routers/database.html';
   }
 
-  var app = angular.module('setup', ['file-model'])
+  angular
+    .module('setup', ['file-model'])
 
-  app.controller('SetupController', ['$log', '$window', function($log, $window) {
+  function SetupController($log, $window) {
+    var vm = this
 
-    this.error = ""
+    vm.error = ""
 
-    var setup = this
-
-    setup.createDb = function() {
-
-      //$log.log(setup.pwdfile)
-      //$log.log(setup.password)
-
-      if (!setup.pwdfile) {
-        setup.error = "You must select where to store your db!"
-      } else if (!setup.password) {
-        setup.error = "You must setup a password for lock your db!"
-      } else if (setup.password.length < 4) {
-        setup.error = "Password must be, at least, 4 chars long!"
+    vm.createDb = function() {
+      if (!vm.pwdfile) {
+        vm.error = "You must select where to store your db!"
+      } else if (!vm.password) {
+        vm.error = "You must setup a password for lock your db!"
+      } else if (vm.password.length < 4) {
+        vm.error = "Password must be, at least, 4 chars long!"
       } else {
-        localStorage.setItem('database', setup.pwdfile.path)
+        localStorage.setItem('database', vm.pwdfile.path)
 
-        dash.setupDB(setup.pwdfile.path, setup.password)
+        dash.setupDB(vm.pwdfile.path, vm.password)
 
         $window.location.href = '../routers/database.html'
       }
-
     }
+  }
 
-  }])
+  angular
+    .module('setup')
+    .controller('SetupController', SetupController)
 
 })()

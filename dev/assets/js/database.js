@@ -9,152 +9,95 @@
     location.href = '../routers/setup.html'
   }
 
-  var app = angular.module('database', ['ngTable'])
+  angular
+    .module('database', ['ngTable'])
 
-  app.controller('DatabaseController', ['$log', '$window', function($log, $window, ngTableParams) {
+  function DatabaseController($log, $window, $filter, ngTableParams) {
 
-    var dbc = this
+    var vm = this
 
-    dbc.db = null
-    dbc.table = null
-    dbc.currentFolder = 'password'
-    dbc.locked = true
+    vm.db = null
+    vm.table = null
+    vm.currentFolder = 'password'
+    vm.locked = true
 
     $window.document.title = 'Unlock Database // Passwger'
-    
-    dbc.tableParams = new ngTableParams({
-      
-    },{
-      total: ,
-      getData: function($defer, params){
-        
+
+    vm.tableParams = new ngTableParams({
+      page: 1,
+      count: 20
+    }, {
+      total: vm.db ? vm.db(vm.currentFolder).length : 0,
+      getData: function($defer, params) {
+
+        var orderedData = params.filter() ?
+        $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
+        vm.db(vm.currentFolder).value();
+
+        vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+
+        params.total(orderedData.length); // set total for recalc pagination
+        $defer.resolve(vm.table);
       }
     })
 
-    dbc.totalFolderItems = function(folder) {
-      if(dbc.db(folder).length) {
-        return dbc.db(folder).length
-      }else{
+
+    vm.totalFolderItems = function(folder) {
+      if (vm.db(folder).length) {
+        return vm.db(folder).length
+      } else {
         return 0
       }
     }
 
-    dbc.unlockDb = function() {
+    vm.unlockDb = function() {
 
-      dbc.db = dash.openDB(dbc.password)
+      vm.db = dash.openDB(vm.password)
 
-      if (dbc.db == false) {
+      if (vm.db == false) {
         alert('Error: wrong unlock password.')
         return
       }
 
-      if (dbc.db.object.settings[0].created) {
-
-        dbc.locked = false
+      if (vm.db.object.settings[0].created) {
+        vm.locked = false
 
         $window.document.title = 'Database // Passwger'
 
-        /*populateList('password')
-
-        prepareAddEntry('password')
-
-        $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
-
-        showTotItemsFolder()*/
-
       } else {
-        dbc.locked = true
+        vm.locked = true
       }
     }
 
-    dbc.saveEntry = function() {
-
-    }
-
-    dbc.isCurrentFolder = function(fold) {
-      //$log.log('check '+fold)
-      if (fold == dbc.currentFolder) {
+    vm.isCurrentFolder = function(fold) {
+      if (fold == vm.currentFolder) {
         return true
       } else {
         return false
       }
     }
 
-    dbc.selectFolder = function(fold) {
-      //$log.log(fold)
-      dbc.currentFolder = fold
-      dbc.table = db(fold).value()
+    vm.selectFolder = function(fold) {
+      vm.currentFolder = fold
     }
 
-    dbc.saveEntry = function() {
+    vm.saveEntry = function() {
 
     }
 
-    dbc.filterEntry = function() {
-      //populateList(getCurrentFolder(), $('#filter-entry').val())
-    }
+  }
 
-    dbc.populateList = function() {
-      /*filter = populateList.arguments.length < 2 ? null : filter;
-
-  $('#fold-' + folder).addClass('active')
-
-  $('#password-list').children().children().remove()
-
-  if (db(folder)) {
-
-    if (db(folder).value().length > 0) {
-
-      $.each(db(folder).sortBy('name').filter(function(item) {
-        if (filter) {
-          return item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-        } else {
-          return true
-        }
-      }).value(), function(index, value) {
-
-        var classItem = ""
-
-        if (index % 2 == 0) {
-          classItem = "class='unread'"
-        }
-
-        var item = "<tr " + classItem + "> \
-        <td class='small-col'><div class='domain-icon' style='background-image: url('assets/img/placeholder-icon.png');'></div></td> \
-        <td class='name'><a href='#'>" + value.name +
-          "</a></td> \
-        </tr>"
-
-        $('#password-list').append(item)
-
-      })
-    } else {
-      $('#password-list').append('<tr><td class="name">No items stored yet.</td></tr>')
-    }
-
-
-  } else {
-    $('#password-list').append('<tr><td class="name">No items stored yet.</td></tr>')
-  }*/
-    }
-
-  }])
+  angular
+    .module('database')
+    .controller('DatabaseController', DatabaseController)
 
 })()
 
 
-var db = null
-
-
-
+/*
 $(document).ready(function() {
 
-  /*$('#a-password').on('click', function() {
-    deselectAllFolder()
-    populateList('password')
-    prepareAddEntry('password')
-    $('#btn-addnew').html('<i class="fa fa-pencil"></i> Add new password')
-  })*/
+
 
   $('#saveEntry').on('click', function(e) {
 
@@ -225,4 +168,4 @@ $(document).ready(function() {
     $('#compose-modal').modal('hide')
   })
 
-})
+})*/
