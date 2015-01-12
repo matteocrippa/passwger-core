@@ -160,26 +160,26 @@
                 <div class="input-group">
                   <span class="input-group-addon">Name:</span>
                   </span>
-                  <input id="form-password-name" type="text" class="form-control" placeholder="Common name">
+                  <input ng-model="dbc.formPasswordName" type="text" class="form-control" placeholder="Common name">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Host:</span>
                   </span>
-                  <input id="form-password-host" type="text" class="form-control" placeholder="http://">
+                  <input ng-model="dbc.formPasswordHost" type="text" class="form-control" placeholder="http://">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Username:</span>
-                  <input id="form-password-username" type="email" class="form-control" placeholder="Username">
+                  <input ng-model="dbc.formPasswordUsername" type="text" class="form-control" placeholder="Username">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Password:</span>
-                  <input id="form-password-password" type="password" class="form-control" placeholder="Password">
+                  <input ng-model="dbc.formPasswordPassword" type="password" class="form-control" placeholder="Password">
                 </div>
               </div>
             </div>
@@ -297,7 +297,7 @@
 
             <div class="modal-footer clearfix">
 
-              <button type="submit" class="btn btn-primary" id="saveEntry"><i class="fa fa-envelope"></i> Save entry</button>
+              <button type="button" class="btn btn-primary" ng-click="dbc.saveEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Save entry</button>
               <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
 
             </div>

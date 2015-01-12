@@ -43,8 +43,8 @@
 
 
     vm.totalFolderItems = function(folder) {
-      if (vm.db(folder).length) {
-        return vm.db(folder).length
+      if (vm.db(folder).value()) {
+        return vm.db(folder).value().length
       } else {
         return 0
       }
@@ -83,6 +83,36 @@
 
     vm.saveEntry = function() {
 
+      $log.log('saving '+vm.currentFolder)
+
+      switch(vm.currentFolder) {
+
+        case "password":
+
+          dash.addEntry(vm.currentFolder, {
+            name: vm.formPasswordName,
+            host: vm.formPasswordHost,
+            username: vm.formPasswordUsername,
+            password: vm.formPasswordPassword
+          })
+
+          $log.log(vm.db(vm.currentFolder).value())
+
+          vm.formPasswordName = vm.formPasswordHost = vm.formPasswordUsername = vm.formPasswordPassword = ""
+          break
+
+        case "server":
+          break
+
+        case "wifi":
+          break
+
+        case "ccard":
+          break
+
+        default:
+          break
+      }
     }
 
   }
