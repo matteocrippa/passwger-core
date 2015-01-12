@@ -9,9 +9,9 @@
     location.href = '../routers/setup.html'
   }
 
-  var app = angular.module('database', [])
+  var app = angular.module('database', ['ngTable'])
 
-  app.controller('DatabaseController', ['$log', '$window', function($log, $window) {
+  app.controller('DatabaseController', ['$log', '$window', function($log, $window, ngTableParams) {
 
     var dbc = this
 
@@ -21,6 +21,15 @@
     dbc.locked = true
 
     $window.document.title = 'Unlock Database // Passwger'
+    
+    dbc.tableParams = new ngTableParams({
+      
+    },{
+      total: ,
+      getData: function($defer, params){
+        
+      }
+    })
 
     dbc.totalFolderItems = function(folder) {
       if(dbc.db(folder).length) {
