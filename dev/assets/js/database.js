@@ -27,12 +27,14 @@
       page: 1,
       count: 20
     }, {
-      total: vm.db ? vm.db(vm.currentFolder).length : 0,
+      total: vm.db ? vm.db(vm.currentFolder).value().length : 0,
       getData: function($defer, params) {
 
         var orderedData = params.filter() ?
         $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
         vm.db(vm.currentFolder).value();
+
+        $log.log(orderedData)
 
         vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
@@ -64,6 +66,8 @@
 
         $window.document.title = 'Database // Passwger'
 
+        vm.tableParams.reload()
+
       } else {
         vm.locked = true
       }
@@ -79,6 +83,7 @@
 
     vm.selectFolder = function(fold) {
       vm.currentFolder = fold
+      vm.tableParams.reload()
     }
 
     vm.saveEntry = function() {
@@ -113,6 +118,7 @@
         default:
           break
       }
+      vm.tableParams.reload()
     }
 
   }
