@@ -22,6 +22,14 @@
 
     $window.document.title = 'Unlock Database // Passwger'
 
+    dbc.totalFolderItems = function(folder) {
+      if(dbc.db(folder).length) {
+        return dbc.db(folder).length
+      }else{
+        return 0
+      }
+    }
+
     dbc.unlockDb = function() {
 
       dbc.db = dash.openDB(dbc.password)
@@ -36,30 +44,6 @@
         dbc.locked = false
 
         $window.document.title = 'Database // Passwger'
-
-        if (dbc.db('password')) {
-          dbc.totPassword = dbc.db('password').length
-        }else{
-          dbc.totPassword = 0
-        }
-
-        if (dbc.db('wifi')) {
-          dbc.totWifi = dbc.db('wifi').length
-        }else{
-          dbc.totWifi = 0
-        }
-
-        if (dbc.db('ccard')) {
-          dbc.totCcard = dbc.db('ccard').length
-        }else{
-          dbc.totCcard = 0
-        }
-
-        if (dbc.db('server')) {
-          dbc.totServer = dbc.db('server').length
-        }else{
-          dbc.totServer = 0
-        }
 
         /*populateList('password')
 
