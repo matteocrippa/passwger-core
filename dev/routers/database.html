@@ -78,7 +78,10 @@
                     <div class="col-md-3 col-sm-4">
 
                       <!-- compose message btn -->
-                      <a id="btn-addnew" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"></a>
+                      <a href ng-show="dbc.isCurrentFolder('password')" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Add new password</a>
+                      <a href ng-show="dbc.isCurrentFolder('server')" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Add new server</a>
+                      <a href ng-show="dbc.isCurrentFolder('wifi')" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Add new wifi</a>
+                      <a href ng-show="dbc.isCurrentFolder('ccard')" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Add new credit card</a>
 
                       <!-- Navigation - folders-->
                       <div style="margin-top: 15px;">
