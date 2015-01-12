@@ -36,11 +36,31 @@
         dbc.locked = false
 
         $window.document.title = 'Database // Passwger'
-        
-        if(dbc.db('password')) {
+
+        if (dbc.db('password')) {
           dbc.totPassword = dbc.db('password').length
+        }else{
+          dbc.totPassword = 0
         }
-        
+
+        if (dbc.db('wifi')) {
+          dbc.totWifi = dbc.db('wifi').length
+        }else{
+          dbc.totWifi = 0
+        }
+
+        if (dbc.db('ccard')) {
+          dbc.totCcard = dbc.db('ccard').length
+        }else{
+          dbc.totCcard = 0
+        }
+
+        if (dbc.db('server')) {
+          dbc.totServer = dbc.db('server').length
+        }else{
+          dbc.totServer = 0
+        }
+
         /*populateList('password')
 
         prepareAddEntry('password')
@@ -62,7 +82,7 @@
       //$log.log('check '+fold)
       if (fold == dbc.currentFolder) {
         return true
-      }else{
+      } else {
         return false
       }
     }
@@ -72,11 +92,15 @@
       dbc.currentFolder = fold
       dbc.table = db(fold).value()
     }
-    
+
+    dbc.saveEntry = function() {
+
+    }
+
     dbc.filterEntry = function() {
       //populateList(getCurrentFolder(), $('#filter-entry').val())
     }
-    
+
     dbc.populateList = function() {
       /*filter = populateList.arguments.length < 2 ? null : filter;
 
@@ -209,25 +233,3 @@ $(document).ready(function() {
   })
 
 })
-
-
-function prepareAddEntry(folder) {
-
-  if (!$('#form-ccard').hasClass('hide')) {
-    $('#form-ccard').addClass('hide')
-  }
-
-  if (!$('#form-server').hasClass('hide')) {
-    $('#form-server').addClass('hide')
-  }
-
-  if (!$('#form-wifi').hasClass('hide')) {
-    $('#form-wifi').addClass('hide')
-  }
-
-  if (!$('#form-password').hasClass('hide')) {
-    $('#form-password').addClass('hide')
-  }
-
-  $('#form-' + folder).removeClass('hide')
-}
