@@ -12,7 +12,7 @@
   angular
     .module('database', ['ngTable'])
 
-  function DatabaseController($log, $window, $filter, ngTableParams) {
+  function DatabaseController($log, $scope, $window, $filter, ngTableParams) {
 
     var vm = this
 
@@ -23,24 +23,33 @@
 
     $window.document.title = 'Unlock Database // Passwger'
 
-    vm.tableParams = new ngTableParams({
+    $scope.$watch(angular.bind(this, function() {
+      return this.currentFolder
+    }), function (newVal, oldVal) {
+      $scope.tableParams.reload()
+    })
+
+    $scope.tableParams = new ngTableParams({
       page: 1,
-      count: 20
+      count: 20,
+      sorting: {
+        name: 'asc'
+      }
     }, {
       total: vm.db ? vm.db(vm.currentFolder).value().length : 0,
       getData: function($defer, params) {
 
         var orderedData = params.filter() ?
         $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
-        vm.db(vm.currentFolder).value();
-
-        $log.log(orderedData)
+        vm.db(vm.currentFolder).value()
 
         vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
-        params.total(orderedData.length); // set total for recalc pagination
-        $defer.resolve(vm.table);
-      }
+        params.total(orderedData.length) // set total for recalc pagination
+
+        $defer.resolve(vm.table)
+      },
+      $scope: { $data: {} }
     })
 
 
@@ -66,7 +75,7 @@
 
         $window.document.title = 'Database // Passwger'
 
-        vm.tableParams.reload()
+        $scope.tableParams.reload()
 
       } else {
         vm.locked = true
@@ -83,12 +92,9 @@
 
     vm.selectFolder = function(fold) {
       vm.currentFolder = fold
-      vm.tableParams.reload()
     }
 
     vm.saveEntry = function() {
-
-      $log.log('saving '+vm.currentFolder)
 
       switch(vm.currentFolder) {
 
@@ -100,8 +106,6 @@
             username: vm.formPasswordUsername,
             password: vm.formPasswordPassword
           })
-
-          $log.log(vm.db(vm.currentFolder).value())
 
           vm.formPasswordName = vm.formPasswordHost = vm.formPasswordUsername = vm.formPasswordPassword = ""
           break
@@ -118,7 +122,7 @@
         default:
           break
       }
-      vm.tableParams.reload()
+
     }
 
   }

@@ -103,30 +103,17 @@
                     </div>
                     <!-- /.col (LEFT) -->
                     <div class="col-md-9 col-sm-8">
-                      <div class="row pad">
-                        <div class="col-sm-12 search-form">
-                          <form action="#" class="text-right">
-                            <div class="input-group">
-                              <input id="filter-entry" type="text" class="form-control input-sm" placeholder="Search" ng-model="dbc.filter" ng-keyup="dbc.filterEntry()">
-                              <div class="input-group-btn">
-                                <button type="submit" name="q" class="btn btn-sm btn-primary" disabled="disabled"><i class="fa fa-search"></i>
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                      <!-- /.row -->
-
-                      <div class="table-responsive">
                         <!-- THE MESSAGES -->
                         <table class="table table-mailbox" ng-table="tableParams" show-filter="true">
-                          <tr ng-repeat="entry in dbc.table">
-                            <td class='small-col' data-title=""><div class='domain-icon' style='background-image: url('../assets/img/placeholder-icon.png');'></div></td>
-                            <td class='name' data-title="Name" filter="{ name: text }">{{ entry.name }}</td>
+                          <tr ng-repeat="entry in $data">
+                            <td class='small-col' data-title="''"><div class='domain-icon' style='background-image: url('../assets/img/placeholder-icon.png');'></div></td>
+                            <td class='name' data-title="'Name'" filter="{ 'name': 'text' }">{{ entry.name }}</td>
                           </tr>
                         </table>
-                      </div>
+                    </div>
+                      <!-- /.row -->
+
+
                       <!-- /.table-responsive -->
                     </div>
                     <!-- /.col (RIGHT) -->
