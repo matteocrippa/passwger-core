@@ -39,9 +39,13 @@
       total: vm.db ? vm.db(vm.currentFolder).value().length : 0,
       getData: function($defer, params) {
 
-        var orderedData = params.filter() ?
+        var filteredData = params.filter() ?
         $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
         vm.db(vm.currentFolder).value()
+        
+        var orderedData = params.sorting ?
+                    $filter('orderBy')(filteredData, params.orderBy()) :
+                    filteredData;
 
         vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
