@@ -25,3 +25,11 @@ dash.addEntry = function(type, entry) {
   return db(type).push(entry.push({ id: uuid() })).value().id
 
 }
+
+dash.updateEnty = function(eid, type, entry) {
+  return db(type).find({ id: eid }).assign(entry).value().id
+}
+
+dash.removeEntry = function(eid, type) {
+  db(type).remove({ id: eid })
+}
