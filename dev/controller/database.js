@@ -22,6 +22,6 @@ dash.openDB = function(pwd) {
 
 dash.addEntry = function(type, entry) {
 
-  return db(type).push(entry).value().id
+  return db(type).push(entry.push({ id: uuid() })).value().id
 
 }
