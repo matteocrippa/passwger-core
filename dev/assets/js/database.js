@@ -156,6 +156,8 @@
           break
       }
 
+      $scope.tableParams.reload()
+
     }
 
   }
