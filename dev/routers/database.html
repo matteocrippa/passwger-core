@@ -176,13 +176,13 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">SSID Name</span>
-                  <input id="form-wifi-ssid" type="text" class="form-control" placeholder="SSID network name">
+                  <input ng-model="dbc.formWifiSsid" type="text" class="form-control" placeholder="SSID network name">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Authentication Method</span>
-                  <select id="form-wifi-authmode" class="form-control">
+                  <select ng-model="dbc.formWifiAuthmode" class="form-control">
                     <option></option>
                     <option value="WEP">WEP</option>
                     <option value="WPA">WPA</option>
@@ -193,7 +193,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Password</span>
-                  <input id="form-wifi-password" type="password" class="form-control" placeholder="SSID network name">
+                  <input ng-model="dbc.formWifiPassword" type="password" class="form-control" placeholder="SSID network name">
                 </div>
               </div>
             </div>
@@ -203,13 +203,13 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Name</span>
-                  <input id="form-server-name" type="text" class="form-control" placeholder="Server name">
+                  <input ng-model="dbc.formServerName" type="text" class="form-control" placeholder="Server name">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Server type</span>
-                  <select id="form-server-type" class="form-control">
+                  <select ng-model="dbc.formServerType" class="form-control">
                     <option></option>
                     <option value="FTP">FTP</option>
                     <option value="SFTP">SFTP</option>
@@ -220,19 +220,19 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Host</span>
-                  <input id="form-server-host" type="text" class="form-control" placeholder="Host/IP">
+                  <input ng-model="dbc.formServerHost" type="text" class="form-control" placeholder="Host/IP">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Username</span>
-                  <input id="form-server-username" type="text" class="form-control" placeholder="Username">
+                  <input ng-model="dbc.formServerUsername" type="text" class="form-control" placeholder="Username">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Password</span>
-                  <input id="form-server-password" type="password" class="form-control" placeholder="SSID network name">
+                  <input ng-model="dbc.formServerPassword" type="password" class="form-control" placeholder="SSID network name">
                 </div>
               </div>
             </div>
@@ -242,13 +242,13 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Name</span>
-                  <input id="form-wifi-name" type="text" class="form-control" placeholder="Give a name to your card">
+                  <input ng-model="dbc.formCcardName" type="text" class="form-control" placeholder="Give a name to your card">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Type</span>
-                  <select id="form-ccard-type" class="form-control">
+                  <select ng-model="dbc.formCcardType" class="form-control">
                     <option></option>
                     <option value="Visa">Visa</option>
                     <option value="Master Card">Master Card</option>
@@ -259,25 +259,25 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Number</span>
-                  <input id="form-ccard-number" type="text" class="form-control" placeholder="Number">
+                  <input ng-model="dbc.formCcardNumber" type="text" class="form-control" placeholder="Number">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Security code</span>
-                  <input id="form-ccard-password" type="password" class="form-control" placeholder="Security code">
+                  <input ng-model="dbc.formCcardSecurity" type="password" class="form-control" placeholder="Security code">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Expiry Date</span>
-                  <input id="form-ccard-expiry" type="text" class="form-control" placeholder="SSID network name">
+                  <input ng-model="dbc.formCcardExpiry" type="text" class="form-control" placeholder="SSID network name">
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">Cardholder</span>
-                  <input id="form-ccard-cardholder" type="text" class="form-control" placeholder="Cardholder name and surname">
+                  <input ng-model="form-ccard-cardholder" type="text" class="form-control" placeholder="Cardholder name and surname">
                 </div>
               </div>
             </div>

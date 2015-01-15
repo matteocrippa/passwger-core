@@ -25,7 +25,7 @@
 
     $scope.$watch(angular.bind(this, function() {
       return this.currentFolder
-    }), function (newVal, oldVal) {
+    }), function(newVal, oldVal) {
       $scope.tableParams.reload()
     })
 
@@ -40,20 +40,22 @@
       getData: function($defer, params) {
 
         var filteredData = params.filter() ?
-        $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
-        vm.db(vm.currentFolder).value()
-        
+          $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
+          vm.db(vm.currentFolder).value()
+
         var orderedData = params.sorting ?
-                    $filter('orderBy')(filteredData, params.orderBy()) :
-                    filteredData;
+          $filter('orderBy')(filteredData, params.orderBy()) :
+          filteredData;
 
         vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
-        params.total(orderedData.length) // set total for recalc pagination
+        params.total(orderedData.length)
 
         $defer.resolve(vm.table)
       },
-      $scope: { $data: {} }
+      $scope: {
+        $data: {}
+      }
     })
 
 
@@ -87,11 +89,7 @@
     }
 
     vm.isCurrentFolder = function(fold) {
-      if (fold == vm.currentFolder) {
-        return true
-      } else {
-        return false
-      }
+      return fold == vm.currentFolder
     }
 
     vm.selectFolder = function(fold) {
@@ -100,7 +98,9 @@
 
     vm.saveEntry = function() {
 
-      switch(vm.currentFolder) {
+      $log.log(vm.currentFolder)
+
+      switch (vm.currentFolder) {
 
         case "password":
 
@@ -115,12 +115,41 @@
           break
 
         case "server":
+
+          dash.addEntry(vm.currentFolder, {
+            name: vm.formServerName,
+            type: vm.formServerType,
+            host: vm.formServerHost,
+            username: vm.formServerUsername,
+            password: vm.formServerPassword
+          })
+
+          vm.formServerName = vm.formServerType = vm.formServerHost = vm.formServerUsername = vm.formServerPassword = ""
           break
 
         case "wifi":
+
+          dash.addEntry(vm.currentFolder, {
+            name: vm.formWifiSsid,
+            authmode: vm.formWifiAuthmode,
+            password: vm.formWifiPassword
+          })
+
+          vm.formWifiSsid = vm.formWifiAuthmode = vm.formWifiPassword = ""
           break
 
         case "ccard":
+
+          dash.addEntry(vm.currentFolder, {
+            name: vm.formCcardName,
+            type: vm.formCcardType,
+            number: vm.formCcardNumber,
+            security: vm.formCcardSecurity,
+            expiry: vm.formCcardExpiry,
+            cardholder: vm.formCcardCardholder
+          })
+
+          vm.formCcardName = vm.formCcardType = vm.formCcardNumber = vm.formCcardSecurity = vm.formCcardExpiry = vm.formCcardCardholder = ""
           break
 
         default:
@@ -136,80 +165,3 @@
     .controller('DatabaseController', DatabaseController)
 
 })()
-
-
-/*
-$(document).ready(function() {
-
-
-
-  $('#saveEntry').on('click', function(e) {
-
-    e.preventDefault()
-
-    var currentFolder = getCurrentFolder()
-
-    // TODO: #11 check all required fields are populated before save
-
-    switch (currentFolder) {
-      case 'password':
-
-        dash.addEntry(currentFolder, {
-          name: $('#form-password-name').val(),
-          host: $('#form-password-host').val(),
-          username: $('#form-password-username').val(),
-          password: $('#form-password-password').val()
-        })
-
-        $('#form-password-username').val('')
-        $('#form-password-password').val('')
-        $('#form-password-host').val('')
-        $('#form-password-name').val('')
-
-        break
-
-      case 'wifi':
-
-        dash.addEntry(currentFolder, {
-          name: $('#form-wifi-ssid').val(),
-          authmode: $('#form-wifi-authmode').val(),
-          password: $('#form-wifi-password').val()
-        })
-
-        $('#form-wifi-ssid').val('')
-        $('#form-wifi-authmode').val('')
-        $('#form-wifi-password').val('')
-
-        break
-
-      case 'server':
-
-        dash.addEntry(currentFolder, {
-          name: $('#form-server-name').val(),
-          type: $('#form-server-type').val(),
-          host: $('#form-server-host').val(),
-          username: $('#form-server-username').val(),
-          password: $('#form-server-password').val()
-        })
-
-        $('#form-wifi-name').val('')
-        $('#form-wifi-type').val('')
-        $('#form-wifi-host').val('')
-        $('#form-wifi-username').val('')
-        $('#form-wifi-password').val('')
-
-        break
-
-
-      default:
-        break
-    }
-
-    showTotItemsFolder()
-
-    populateList(currentFolder)
-
-    $('#compose-modal').modal('hide')
-  })
-
-})*/
