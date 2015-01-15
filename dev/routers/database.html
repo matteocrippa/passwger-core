@@ -89,13 +89,13 @@
                       <div style="margin-top: 15px;">
                         <ul class="nav nav-pills nav-stacked" id="folder-menu">
                           <li class="header">Folders</li>
-                          <li id="fold-password" ng-class="{ 'active' : dbc.isCurrentFolder('password') }"><a href ng-click="dbc.selectFolder('password')" ><i class="fa fa-key"></i> Password ({{ dbc.totalFolderItems('password') }})</a>
+                          <li id="fold-password" ng-class="{ 'active' : dbc.isCurrentFolder('password') }"><a href ng-click="dbc.selectFolder('password')"><i class="fa fa-key"></i> Password ({{ dbc.totalFolderItems('password') }})</a>
                           </li>
-                          <li id="fold-server" ng-class="{ 'active' : dbc.isCurrentFolder('server') }"><a href id="a-server" ng-click="dbc.selectFolder('server')" ><i class="fa fa-hdd-o"></i> Server ({{ dbc.totalFolderItems('server') }})</a>
+                          <li id="fold-server" ng-class="{ 'active' : dbc.isCurrentFolder('server') }"><a href id="a-server" ng-click="dbc.selectFolder('server')"><i class="fa fa-hdd-o"></i> Server ({{ dbc.totalFolderItems('server') }})</a>
                           </li>
-                          <li id="fold-wifi" ng-class="{ 'active' : dbc.isCurrentFolder('wifi') }"><a href id="a-wifi" ng-click="dbc.selectFolder('wifi')" ><i class="fa fa-rss"></i> Wi-Fi ({{ dbc.totalFolderItems('wifi') }})</a>
+                          <li id="fold-wifi" ng-class="{ 'active' : dbc.isCurrentFolder('wifi') }"><a href id="a-wifi" ng-click="dbc.selectFolder('wifi')"><i class="fa fa-rss"></i> Wi-Fi ({{ dbc.totalFolderItems('wifi') }})</a>
                           </li>
-                          <li id="fold-ccard" ng-class="{ 'active' : dbc.isCurrentFolder('ccard') }"><a href id="a-ccard" ng-click="dbc.selectFolder('ccard')" ><i class="fa fa-credit-card"></i> Credit Card ({{ dbc.totalFolderItems('ccard') }})</a>
+                          <li id="fold-ccard" ng-class="{ 'active' : dbc.isCurrentFolder('ccard') }"><a href id="a-ccard" ng-click="dbc.selectFolder('ccard')"><i class="fa fa-credit-card"></i> Credit Card ({{ dbc.totalFolderItems('ccard') }})</a>
                           </li>
                           <!--li id="fold-identity"><a id="a-identity" href="#"><i class="fa fa-male"></i> Identity</a></li-->
                         </ul>
@@ -103,200 +103,200 @@
                     </div>
                     <!-- /.col (LEFT) -->
                     <div class="col-md-9 col-sm-8">
-                        <!-- THE MESSAGES -->
-                        <table class="table table-mailbox" ng-table="tableParams" show-filter="true">
-                          <tr ng-repeat="entry in $data">
-                            <td class='small-col' data-title="''"><div class='domain-icon' style='background-image: url('../assets/img/placeholder-icon.png');'></div></td>
-                            <td class='name' data-title="'Name'" filter="{ 'name': 'text' }">{{ entry.name }}</td>
-                          </tr>
-                        </table>
+                      <!-- THE MESSAGES -->
+                      <table class="table table-mailbox" ng-table="tableParams" show-filter="true">
+                        <tr ng-repeat="entry in $data">
+                          <td class='small-col' data-title="''">
+                            <div class='domain-icon' style='background-image: url(' ../assets/img/placeholder-icon.png ');'></div>
+                          </td>
+                          <td class='name' data-title="'Name'" filter="{ 'name': 'text' }">{{ entry.name }}</td>
+                        </tr>
+                      </table>
                     </div>
-                      <!-- /.row -->
+                    <!-- /.row -->
 
 
-                      <!-- /.table-responsive -->
-                    </div>
-                    <!-- /.col (RIGHT) -->
+                    <!-- /.table-responsive -->
                   </div>
-                  <!-- /.row -->
+                  <!-- /.col (RIGHT) -->
                 </div>
-                <!-- /.box-body -->
+                <!-- /.row -->
               </div>
-              <!-- /.box -->
+              <!-- /.box-body -->
             </div>
-            <!-- /.col (MAIN) -->
+            <!-- /.box -->
           </div>
-          <!-- MAILBOX END -->
-
-        </section>
-        <!-- /.content -->
-      </aside>
-      <!-- /.right-side -->
+          <!-- /.col (MAIN) -->
     </div>
-    <!-- ./wrapper -->
+    <!-- MAILBOX END -->
 
-    <!-- COMPOSE MESSAGE MODAL -->
-    <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form>
-
-            <div class="modal-body" ng-show="dbc.isCurrentFolder('password')">
-              <p class="lead">Add new Password</p>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Name:</span>
-                  </span>
-                  <input ng-model="dbc.formPasswordName" type="text" class="form-control" placeholder="Common name">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Host:</span>
-                  </span>
-                  <input ng-model="dbc.formPasswordHost" type="text" class="form-control" placeholder="http://">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Username:</span>
-                  <input ng-model="dbc.formPasswordUsername" type="text" class="form-control" placeholder="Username">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Password:</span>
-                  <input ng-model="dbc.formPasswordPassword" type="password" class="form-control" placeholder="Password">
-                </div>
-              </div>
-            </div>
-
-            <div class="modal-body" ng-show="dbc.isCurrentFolder('wifi')">
-              <p class="lead">Add new Wi-Fi</p>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">SSID Name</span>
-                  <input ng-model="dbc.formWifiSsid" type="text" class="form-control" placeholder="SSID network name">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Authentication Method</span>
-                  <select ng-model="dbc.formWifiAuthmode" class="form-control">
-                    <option></option>
-                    <option value="WEP">WEP</option>
-                    <option value="WPA">WPA</option>
-                    <option value="WPA2">WPA2</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Password</span>
-                  <input ng-model="dbc.formWifiPassword" type="password" class="form-control" placeholder="SSID network name">
-                </div>
-              </div>
-            </div>
-
-            <div class="modal-body" ng-show="dbc.isCurrentFolder('server')">
-              <p class="lead">Add new Server</p>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Name</span>
-                  <input ng-model="dbc.formServerName" type="text" class="form-control" placeholder="Server name">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Server type</span>
-                  <select ng-model="dbc.formServerType" class="form-control">
-                    <option></option>
-                    <option value="FTP">FTP</option>
-                    <option value="SFTP">SFTP</option>
-                    <option value="SSH">SSH</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Host</span>
-                  <input ng-model="dbc.formServerHost" type="text" class="form-control" placeholder="Host/IP">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Username</span>
-                  <input ng-model="dbc.formServerUsername" type="text" class="form-control" placeholder="Username">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Password</span>
-                  <input ng-model="dbc.formServerPassword" type="password" class="form-control" placeholder="SSID network name">
-                </div>
-              </div>
-            </div>
-
-            <!--div class="modal-body" ng-show="dbc.isCurrentFolder('ccard')">
-              <p class="lead">Add new Credit Card</p>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Name</span>
-                  <input ng-model="dbc.formCcardName" type="text" class="form-control" placeholder="Give a name to your card">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Type</span>
-                  <select ng-model="dbc.formCcardType" class="form-control">
-                    <option></option>
-                    <option value="Visa">Visa</option>
-                    <option value="Master Card">Master Card</option>
-                    <option value="American Express">American Express</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Number</span>
-                  <input ng-model="dbc.formCcardNumber" type="text" class="form-control" placeholder="Number">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Security code</span>
-                  <input ng-model="dbc.formCcardSecurity" type="password" class="form-control" placeholder="Security code">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Expiry Date</span>
-                  <input ng-model="dbc.formCcardExpiry" type="text" class="form-control" placeholder="SSID network name">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">Cardholder</span>
-                  <input ng-model="dbc.formCcardCardholder" type="text" class="form-control" placeholder="Cardholder name and surname">
-                </div>
-              </div>
-            </div-->
-
-            <div class="modal-footer clearfix">
-
-              <button type="button" class="btn btn-primary" ng-click="dbc.saveEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Save entry</button>
-              <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
-
-            </div>
-          </form>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-
+    </section>
+    <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
   </div>
+  <!-- ./wrapper -->
+
+  <!-- COMPOSE MESSAGE MODAL -->
+  <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form>
+
+          <div class="modal-body" ng-show="dbc.isCurrentFolder('password')">
+            <p class="lead">Add new Password</p>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Name:</span>
+                </span>
+                <input ng-model="dbc.formPasswordName" type="text" class="form-control" placeholder="Common name">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Host:</span>
+                </span>
+                <input ng-model="dbc.formPasswordHost" type="text" class="form-control" placeholder="http://">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Username:</span>
+                <input ng-model="dbc.formPasswordUsername" type="text" class="form-control" placeholder="Username">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Password:</span>
+                <input ng-model="dbc.formPasswordPassword" type="password" class="form-control" placeholder="Password">
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-body" ng-show="dbc.isCurrentFolder('wifi')">
+            <p class="lead">Add new Wi-Fi</p>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">SSID Name</span>
+                <input ng-model="dbc.formWifiSsid" type="text" class="form-control" placeholder="SSID network name">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Authentication Method</span>
+                <select ng-model="dbc.formWifiAuthmode" class="form-control">
+                  <option></option>
+                  <option value="WEP">WEP</option>
+                  <option value="WPA">WPA</option>
+                  <option value="WPA2">WPA2</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Password</span>
+                <input ng-model="dbc.formWifiPassword" type="password" class="form-control" placeholder="SSID network name">
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-body" ng-show="dbc.isCurrentFolder('server')">
+            <p class="lead">Add new Server</p>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input ng-model="dbc.formServerName" type="text" class="form-control" placeholder="Server name">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Server type</span>
+                <select ng-model="dbc.formServerType" class="form-control">
+                  <option></option>
+                  <option value="FTP">FTP</option>
+                  <option value="SFTP">SFTP</option>
+                  <option value="SSH">SSH</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Host</span>
+                <input ng-model="dbc.formServerHost" type="text" class="form-control" placeholder="Host/IP">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Username</span>
+                <input ng-model="dbc.formServerUsername" type="text" class="form-control" placeholder="Username">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Password</span>
+                <input ng-model="dbc.formServerPassword" type="password" class="form-control" placeholder="SSID network name">
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-body" ng-show="dbc.isCurrentFolder('ccard')">
+            <p class="lead">Add new Credit Card</p>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input ng-model="dbc.formCcardName" type="text" class="form-control" placeholder="Give a name to your card">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Type</span>
+                <select ng-model="dbc.formCcardType" class="form-control">
+                  <option></option>
+                  <option value="Visa">Visa</option>
+                  <option value="Master Card">Master Card</option>
+                  <option value="American Express">American Express</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Number</span>
+                <input ng-model="dbc.formCcardNumber" type="text" class="form-control" placeholder="Number">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Security code</span>
+                <input ng-model="dbc.formCcardSecurity" type="password" class="form-control" placeholder="Security code">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Expiry Date</span>
+                <input ng-model="dbc.formCcardExpiry" type="text" class="form-control" placeholder="SSID network name">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">Cardholder</span>
+                <input ng-model="dbc.formCcardCardholder" type="text" class="form-control" placeholder="Cardholder name and surname">
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer clearfix">
+
+            <button type="button" class="btn btn-primary" ng-click="dbc.saveEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Save entry</button>
+            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
+
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
 </body>
 
