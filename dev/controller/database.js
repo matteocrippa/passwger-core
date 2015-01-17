@@ -1,18 +1,18 @@
 window.dash = window.dash || {}
 
 var low = require('lowdb')
-low.mixin(require('underscore-db'))
+var uuid = require('node-uuid')
 
 var db = null
 
 dash.openDB = function(pwd) {
 
-  try{
+  try {
     db = low(localStorage.getItem('database'), {
       encrypt: true,
       passkey: pwd
     })
-  }catch(ex){
+  } catch (ex) {
     return false
   }
 
@@ -21,15 +21,18 @@ dash.openDB = function(pwd) {
 }
 
 dash.addEntry = function(type, entry) {
-
-  return db(type).push(entry.push({ id: uuid() })).value().id
-
+  entry.id = uuid.v4()
+  return db(type).push(entry)
 }
 
 dash.updateEnty = function(eid, type, entry) {
-  return db(type).find({ id: eid }).assign(entry).value().id
+  return db(type).find({
+    id: eid
+  }).assign(entry)
 }
 
 dash.removeEntry = function(eid, type) {
-  db(type).remove({ id: eid })
+  return db(type).remove({
+    id: eid
+  })
 }

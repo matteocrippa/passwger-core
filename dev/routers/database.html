@@ -109,7 +109,7 @@
                           <td class='small-col' data-title="''">
                             <div class='domain-icon' style='background-image: url(' ../assets/img/placeholder-icon.png ');'></div>
                           </td>
-                          <td class='name' data-title="'Name'" filter="{ 'name': 'text' }">{{ entry.name }}</td>
+                          <td class='name' data-title="'Name'" filter="{ 'name': 'text' }"><a href ng-click="dbc.setCurrentEntry('{{entry.id}}')" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal">{{ entry.name }}</a></td>
                         </tr>
                       </table>
                     </div>
@@ -144,31 +144,32 @@
         <form>
 
           <div class="modal-body" ng-show="dbc.isCurrentFolder('password')">
-            <p class="lead">Add new Password</p>
+            <p ng-hide="dbc.currentEntry" class="lead">Add new Password</p>
+            <p ng-show="dbc.currentEntry" class="lead">Edit Password</p>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon">Name:</span>
                 </span>
-                <input ng-model="dbc.formPasswordName" type="text" class="form-control" placeholder="Common name">
+                <input ng-model="dbc.formPasswordName" type="text" class="form-control" placeholder="Common name" value="{{ dbc.currentEntry.name }}">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon">Host:</span>
                 </span>
-                <input ng-model="dbc.formPasswordHost" type="text" class="form-control" placeholder="http://">
+                <input ng-model="dbc.formPasswordHost" type="text" class="form-control" placeholder="http://" value="{{ dbc.currentEntry.host }}">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon">Username:</span>
-                <input ng-model="dbc.formPasswordUsername" type="text" class="form-control" placeholder="Username">
+                <input ng-model="dbc.formPasswordUsername" type="text" class="form-control" placeholder="Username" value="{{ dbc.currentEntry.username }}">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon">Password:</span>
-                <input ng-model="dbc.formPasswordPassword" type="password" class="form-control" placeholder="Password">
+                <input ng-model="dbc.formPasswordPassword" type="password" class="form-control" placeholder="Password" value="{{ dbc.currentEntry.password }}">
               </div>
             </div>
           </div>
@@ -286,8 +287,14 @@
 
           <div class="modal-footer clearfix">
 
-            <button type="button" class="btn btn-primary" ng-click="dbc.saveEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Save entry</button>
-            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
+            <button ng-hide="dbc.currentEntry" type="button" class="btn btn-primary" ng-click="dbc.saveEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Save entry</button>
+            <button ng-hide="dbc.currentEntry" type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
+
+            <input type="hidden" ng-model="dbc.form.id" value={{dbc.currentEntry.id}} />
+            <button ng-show="dbc.currentEntry" type="button" class="btn btn-primary" ng-click="dbc.updateEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Update entry</button>
+            <button ng-show="dbc.currentEntry" type="button" class="btn btn-danger pull-left" data-dismiss="modal" ng-click="dbc.removeEntry()"><i class="fa fa-times"></i> Remove entry</button>
+            <button ng-show="dbc.currentEntry" type="button" class="btn btn-danger pull-left" data-dismiss="modal" ng-click="dbc.currentEntry = null"><i class="fa fa-times"></i> Discard</button>
+
 
           </div>
         </form>

@@ -20,6 +20,7 @@
     vm.table = null
     vm.currentFolder = 'password'
     vm.locked = true
+    vm.currentEntry = null
 
     $window.document.title = 'Unlock Database // Passwger'
 
@@ -96,9 +97,24 @@
       vm.currentFolder = fold
     }
 
-    vm.saveEntry = function() {
+    vm.setCurrentEntry = function(item) {
 
-      $log.log(vm.currentFolder)
+      vm.currentEntry = db(vm.currentFolder).find({ id: item })
+
+      $log.log(vm.currentEntry)
+    }
+
+    vm.removeEntry = function() {
+      dash.removeEntry(vm.currentFolder, vm.form.id)
+      vm.currentEntry = null
+    }
+
+    vm.updateEntry = function() {
+      dash.updateEntry(vm.currentFolder, vm.form.id)
+      vm.currentEntry = null
+    }
+
+    vm.saveEntry = function() {
 
       switch (vm.currentFolder) {
 
