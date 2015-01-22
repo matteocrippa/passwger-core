@@ -4,7 +4,7 @@
   "description": "A crossplatform password manager builder script",
   "main": "builder.js",
   "dependencies": {
-    "node-webkit-builder": "mllrsohn/node-webkit-builder"
+    "node-webkit-builder": "*"
   },
   "keywords": [
     "password",

@@ -6,7 +6,6 @@ var nw = new NwBuilder({
   platforms: ['osx64'],
   macIcns: './icon/icon.icns',
   winIco: './icon/icon.ico',
-  version: '0.11.5'
 });
 
 //Log stuff you want

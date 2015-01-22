@@ -1,10 +1,14 @@
 (function() {
 
+  var fs = require('fs')
+  var low = require('lowdb')
+  var uuid = require('node-uuid')
+
   if (!localStorage.getItem('database')) {
     location.href = '../routers/setup.html'
   }
 
-  if (!dash.dbExists()) {
+  if (!fs.existsSync(localStorage.getItem('database'))) {
     localStorage.removeItem('database')
     location.href = '../routers/setup.html'
   }
@@ -70,11 +74,13 @@
 
     vm.unlockDb = function() {
 
-      vm.db = dash.openDB(vm.password)
-
-      if (vm.db == false) {
+      try {
+        vm.db = low(localStorage.getItem('database'), {
+          encrypt: true,
+          passkey: vm.password
+        })
+      } catch (ex) {
         alert('Error: wrong unlock password.')
-        return
       }
 
       if (vm.db.object.settings[0].created) {
@@ -105,20 +111,30 @@
     }
 
     vm.removeEntry = function() {
-      dash.removeEntry(vm.currentFolder, vm.form.id)
+      db(vm.currentFolder).remove({
+        id: vm.form.id
+      })
       vm.currentEntry = null
     }
 
     vm.updateEntry = function() {
-      dash.updateEntry(vm.currentFolder, vm.form.id)
+      vm.db(vm.currentFolder).find({
+        id: vm.form.id
+      }).assign(vm.form)
       vm.currentEntry = null
     }
 
     vm.saveEntry = function() {
 
-      switch (vm.currentFolder) {
+      vm.form.id = uuid.v4()
+
+      vm.db(vm.currentFolder).push(vm.form)
+
+      /*switch (vm.currentFolder) {
 
         case "password":
+
+          return db(type).push(entry)
 
           dash.addEntry(vm.currentFolder, {
             name: vm.formPasswordName,
@@ -170,7 +186,7 @@
 
         default:
           break
-      }
+      }*/
 
       $scope.tableParams.reload()
 
