@@ -14,9 +14,11 @@
   }
 
   angular
-    .module('database', ['ngTable'])
+    .module('database', ['ngTable','ngMaterial', 'ngMessages'])
 
-  function DatabaseController($log, $scope, $window, $filter, ngTableParams) {
+  function DatabaseController($log, $scope, $mdDialog, $window, $filter, ngTableParams) {
+
+    var folders = ['password', 'server', 'wifi', 'ccard']
 
     var vm = this
 
@@ -26,7 +28,15 @@
     vm.locked = true
     vm.currentEntry = null
 
+    vm.selectedIndex = 0
+
     $window.document.title = 'Unlock Database // Passwger'
+
+    $scope.$watch(angular.bind(this, function(){
+      return this.selectedIndex
+    }), function(newVal, oldVal){
+      vm.currentFolder = folders[newVal]
+    })
 
     $scope.$watch(angular.bind(this, function() {
       return this.currentFolder
@@ -63,6 +73,26 @@
       }
     })
 
+    vm.showModal = function(ev) {
+      $mdDialog.show({
+        controller: function($scope, $mdDialog){
+          $scope.hide = function() {
+            $mdDialog.hide()
+          }
+
+          $scope.cancel = function() {
+            $mdDialog.cancel()
+          }
+
+          $scope.answer = function(answer) {
+            $mdDialog.hide(answer)
+          }
+        },
+        templateUrl: 'modals/form.'+vm.currentFolder+'.tmpl.html',
+        targetEvent: ev
+      })
+    }
+
 
     vm.totalFolderItems = function(folder) {
       if (vm.db(folder).value()) {
@@ -97,10 +127,6 @@
 
     vm.isCurrentFolder = function(fold) {
       return fold == vm.currentFolder
-    }
-
-    vm.selectFolder = function(fold) {
-      vm.currentFolder = fold
     }
 
     vm.setCurrentEntry = function(item) {
@@ -197,5 +223,17 @@
   angular
     .module('database')
     .controller('DatabaseController', DatabaseController)
+
+
+
+  angular
+    .module('database')
+    .config(function($mdThemingProvider) {
+      $mdThemingProvider.theme('default')
+        .primaryPalette('green')
+        .accentPalette('green')
+        .warnPalette('red')
+        .backgroundPalette('grey')
+    })
 
 })()

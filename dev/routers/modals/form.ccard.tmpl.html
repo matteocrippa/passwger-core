@@ -1,0 +1,57 @@
+<div class="modal-body" ng-show="dbc.isCurrentFolder('ccard')">
+  <p class="lead">Add new Credit Card</p>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Name</span>
+      <input ng-model="dbc.formCcardName" type="text" class="form-control" placeholder="Give a name to your card">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Type</span>
+      <select ng-model="dbc.formCcardType" class="form-control">
+        <option></option>
+        <option value="Visa">Visa</option>
+        <option value="Master Card">Master Card</option>
+        <option value="American Express">American Express</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Number</span>
+      <input ng-model="dbc.formCcardNumber" type="text" class="form-control" placeholder="Number">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Security code</span>
+      <input ng-model="dbc.formCcardSecurity" type="password" class="form-control" placeholder="Security code">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Expiry Date</span>
+      <input ng-model="dbc.formCcardExpiry" type="text" class="form-control" placeholder="SSID network name">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Cardholder</span>
+      <input ng-model="dbc.formCcardCardholder" type="text" class="form-control" placeholder="Cardholder name and surname">
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer clearfix">
+
+  <button ng-hide="dbc.currentEntry" type="button" class="btn btn-primary" ng-click="dbc.saveEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Save entry</button>
+  <button ng-hide="dbc.currentEntry" type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
+
+  <input type="hidden" ng-model="dbc.form.id" value={{dbc.currentEntry.id}} />
+  <button ng-show="dbc.currentEntry" type="button" class="btn btn-primary" ng-click="dbc.updateEntry()" data-dismiss="modal"><i class="fa fa-envelope"></i> Update entry</button>
+  <button ng-show="dbc.currentEntry" type="button" class="btn btn-danger pull-left" data-dismiss="modal" ng-click="dbc.removeEntry()"><i class="fa fa-times"></i> Remove entry</button>
+  <button ng-show="dbc.currentEntry" type="button" class="btn btn-danger pull-left" data-dismiss="modal" ng-click="dbc.currentEntry = null"><i class="fa fa-times"></i> Discard</button>
+
+
+</div>

@@ -1,0 +1,95 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <md-content>
+
+    <md-content class="md-padding">
+      <form name="userForm">
+        <md-input-container flex>
+          <label>Company (Disabled)</label>
+          <input ng-model="user.company" disabled>
+        </md-input-container>
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>First Name</label>
+            <input ng-model="user.firstName">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Last Name</label>
+            <input ng-model="theMax">
+          </md-input-container>
+        </div>
+        <md-input-container flex>
+          <label>Address</label>
+          <input ng-model="user.address">
+        </md-input-container>
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>City</label>
+            <input ng-model="user.city">
+          </md-input-container>
+          <md-input-container flex>
+            <label>State</label>
+            <input ng-model="user.state">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Postal Code</label>
+            <input ng-model="user.postalCode">
+          </md-input-container>
+        </div>
+        <md-input-container flex>
+          <label>Biography</label>
+          <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea>
+        </md-input-container>
+      </md-content>
+
+    <div class="modal-body" >
+      <p class="lead">Add new Server</p>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">Name</span>
+          <input ng-model="dbc.formServerName" type="text" class="form-control" placeholder="Server name">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">Server type</span>
+          <select ng-model="dbc.formServerType" class="form-control">
+            <option></option>
+            <option value="FTP">FTP</option>
+            <option value="SFTP">SFTP</option>
+            <option value="SSH">SSH</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">Host</span>
+          <input ng-model="dbc.formServerHost" type="text" class="form-control" placeholder="Host/IP">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">Username</span>
+          <input ng-model="dbc.formServerUsername" type="text" class="form-control" placeholder="Username">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">Password</span>
+          <input ng-model="dbc.formServerPassword" type="password" class="form-control" placeholder="SSID network name">
+        </div>
+      </div>
+    </div>
+</md-content>
+<div class="md-actions" layout="row">
+  <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" hide show-md>
+    More on Wikipedia
+  </md-button>
+  <span flex></span>
+  <md-button ng-click="answer('not useful')">
+    Not Useful
+  </md-button>
+  <md-button ng-click="answer('useful')" class="md-primary">
+    Useful
+  </md-button>
+</div>
+</md-dialog>

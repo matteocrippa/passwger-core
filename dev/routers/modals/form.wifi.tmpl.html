@@ -1,0 +1,65 @@
+<md-modal>
+  <md-content>
+    <md-toolbar class="md-primary">
+      <h1 class="md-toolbar-tools">
+        Top Secret Project
+      </h1>
+    </md-toolbar>
+    <md-content class="md-padding">
+      <form name="projectForm">
+        <md-input-container>
+          <label>Description</label>
+          <input md-maxlength="30" required name="description" ng-model="project.description">
+          <div ng-messages="projectForm.description.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Client Name</label>
+          <input required name="clientName" ng-model="project.clientName">
+          <div ng-messages="projectForm.clientName.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Hourly Rate (USD)</label>
+          <input required type="number" step="any" name="rate" ng-model="project.rate" min="800" max="4999" required>
+          <div ng-messages="projectForm.rate.$error">
+            <div ng-message="required">You've got to charge something! You can't just <b>give away</b> a Missile Defense System.</div>
+            <div ng-message="min">You should charge at least $800 an hour. This job is a big deal... if you mess up, everyone dies!</div>
+            <div ng-message="max">$5,000 an hour? That's a little ridiculous. I doubt event Bill Clinton could afford that.</div>
+          </div>
+        </md-input-container>
+      </form>
+
+      <div class="modal-body" ng-show="dbc.isCurrentFolder('wifi')">
+        <p class="lead">Add new Wi-Fi</p>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">SSID Name</span>
+            <input ng-model="dbc.formWifiSsid" type="text" class="form-control" placeholder="SSID network name">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">Authentication Method</span>
+            <select ng-model="dbc.formWifiAuthmode" class="form-control">
+              <option></option>
+              <option value="WEP">WEP</option>
+              <option value="WPA">WPA</option>
+              <option value="WPA2">WPA2</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <input ng-model="dbc.formWifiPassword" type="password" class="form-control" placeholder="SSID network name">
+          </div>
+        </div>
+      </div>
+
+    </md-content>
+  </md-content>
+</md-modal>
