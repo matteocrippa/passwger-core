@@ -14,7 +14,7 @@
   }
 
   angular
-    .module('database', ['ngTable','ngMaterial', 'ngMessages'])
+    .module('database', ['ngTable', 'ngMaterial', 'ngMessages'])
 
   function DatabaseController($log, $scope, $mdDialog, $window, $filter, ngTableParams) {
 
@@ -32,9 +32,9 @@
 
     $window.document.title = 'Unlock Database // Passwger'
 
-    $scope.$watch(angular.bind(this, function(){
+    $scope.$watch(angular.bind(this, function() {
       return this.selectedIndex
-    }), function(newVal, oldVal){
+    }), function(newVal, oldVal) {
       vm.currentFolder = folders[newVal]
     })
 
@@ -75,7 +75,7 @@
 
     vm.showModal = function(ev) {
       $mdDialog.show({
-        controller: function($scope, $mdDialog){
+        controller: function($scope, $mdDialog) {
           $scope.hide = function() {
             $mdDialog.hide()
           }
@@ -84,11 +84,13 @@
             $mdDialog.cancel()
           }
 
-          $scope.answer = function(answer) {
-            $mdDialog.hide(answer)
+          $scope.save = function(form) {
+            console.log($scope.form)
+            $mdDialog.hide()
           }
+          
         },
-        templateUrl: 'modals/form.'+vm.currentFolder+'.tmpl.html',
+        templateUrl: 'modals/form.' + vm.currentFolder + '.tmpl.html',
         targetEvent: ev
       })
     }
@@ -131,7 +133,9 @@
 
     vm.setCurrentEntry = function(item) {
 
-      vm.currentEntry = db(vm.currentFolder).find({ id: item })
+      vm.currentEntry = db(vm.currentFolder).find({
+        id: item
+      })
 
       $log.log(vm.currentEntry)
     }
@@ -224,16 +228,5 @@
     .module('database')
     .controller('DatabaseController', DatabaseController)
 
-
-
-  angular
-    .module('database')
-    .config(function($mdThemingProvider) {
-      $mdThemingProvider.theme('default')
-        .primaryPalette('green')
-        .accentPalette('green')
-        .warnPalette('red')
-        .backgroundPalette('grey')
-    })
 
 })()
