@@ -10,7 +10,7 @@ var nw = new NwBuilder({
 
 //Log stuff you want
 
-nw.on('log',  console.log);
+//nw.on('log',  console.log);
 
 // Build returns a promise
 nw.build().then(function () {

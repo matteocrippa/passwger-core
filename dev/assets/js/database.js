@@ -44,6 +44,12 @@
       $scope.tableParams.reload()
     })
 
+    $scope.$watch(angular.bind(this, function(){
+      return this.db(vm.currentFolder).value().length
+    }),function(newVal, oldVal){
+      $scope.tableParams.reload()
+    })
+
     $scope.tableParams = new ngTableParams({
       page: 1,
       count: 20,
@@ -86,18 +92,41 @@
             $scope.form = form
           }
 
-          $scope.hide = function() {
-            $mdDialog.hide()
-          }
-
           $scope.cancel = function() {
             $mdDialog.cancel()
           }
 
-          $scope.save = function(form) {
-            console.log($scope.form)
+          $scope.remove = function() {
+
+            vm.db(vm.currentFolder).remove({
+              id: $scope.form.id
+            })
+            vm.currentEntry = null
 
             $mdDialog.hide()
+
+          }
+
+          $scope.save = function(form) {
+
+            if($scope.form.id){
+
+              vm.db(vm.currentFolder).find({
+                id: $scope.form.id
+              }).assign($scope.form)
+
+              vm.currentEntry = null
+
+            }else{
+
+              $scope.form.id = uuid.v4()
+
+              vm.db(vm.currentFolder).push($scope.form)
+
+            }
+
+            $mdDialog.hide()
+
           }
 
         },
@@ -157,88 +186,6 @@
 
     vm.unsetCurrentEntry = function() {
       vm.currentEntry = null
-    }
-
-    vm.removeEntry = function() {
-      vm.db(vm.currentFolder).remove({
-        id: vm.form.id
-      })
-      vm.currentEntry = null
-    }
-
-    vm.updateEntry = function() {
-      vm.db(vm.currentFolder).find({
-        id: vm.form.id
-      }).assign(vm.form)
-      vm.currentEntry = null
-    }
-
-    vm.saveEntry = function() {
-
-      vm.form.id = uuid.v4()
-
-      vm.db(vm.currentFolder).push(vm.form)
-
-      /*switch (vm.currentFolder) {
-
-        case "password":
-
-          return db(type).push(entry)
-
-          dash.addEntry(vm.currentFolder, {
-            name: vm.formPasswordName,
-            host: vm.formPasswordHost,
-            username: vm.formPasswordUsername,
-            password: vm.formPasswordPassword
-          })
-
-          vm.formPasswordName = vm.formPasswordHost = vm.formPasswordUsername = vm.formPasswordPassword = ""
-          break
-
-        case "server":
-
-          dash.addEntry(vm.currentFolder, {
-            name: vm.formServerName,
-            type: vm.formServerType,
-            host: vm.formServerHost,
-            username: vm.formServerUsername,
-            password: vm.formServerPassword
-          })
-
-          vm.formServerName = vm.formServerType = vm.formServerHost = vm.formServerUsername = vm.formServerPassword = ""
-          break
-
-        case "wifi":
-
-          dash.addEntry(vm.currentFolder, {
-            name: vm.formWifiSsid,
-            authmode: vm.formWifiAuthmode,
-            password: vm.formWifiPassword
-          })
-
-          vm.formWifiSsid = vm.formWifiAuthmode = vm.formWifiPassword = ""
-          break
-
-        case "ccard":
-
-          dash.addEntry(vm.currentFolder, {
-            name: vm.formCcardName,
-            type: vm.formCcardType,
-            number: vm.formCcardNumber,
-            security: vm.formCcardSecurity,
-            expiry: vm.formCcardExpiry,
-            cardholder: vm.formCcardCardholder
-          })
-
-          vm.formCcardName = vm.formCcardType = vm.formCcardNumber = vm.formCcardSecurity = vm.formCcardExpiry = vm.formCcardCardholder = ""
-          break
-
-        default:
-          break
-      }*/
-
-      $scope.tableParams.reload()
-
     }
 
   }
