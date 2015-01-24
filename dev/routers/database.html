@@ -6,8 +6,9 @@
   <title>Database // Passwger</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
+  <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
   <link href="../assets/js/libs/angular-material/angular-material.min.css" rel="stylesheet" />
-  <link href="../assets/js/libs/ng-table/ng-table.min.css" rel="stylesheet" type="text/css" />
+  <link href="../assets/js/libs/ng-table/dist/ng-table.css" rel="stylesheet" type="text/css" />
 
   <script src="../assets/js/libs/hammerjs/hammer.min.js" type="text/javascript"></script>
 
@@ -16,7 +17,7 @@
   <script src="../assets/js/libs/angular-aria/angular-aria.min.js" type="text/javascript"></script>
   <script src="../assets/js/libs/angular-messages/angular-messages.min.js" type="text/javascript"></script>
 
-  <script src="../assets/js/libs/ng-table/ng-table.min.js" type="text/javascript"></script>
+  <script src="../assets/js/libs/ng-table/dist/ng-table.js" type="text/javascript"></script>
 
   <script src="../assets/js/libs/angular-material/angular-material.min.js" type="text/javascript"></script>
 
@@ -26,40 +27,22 @@
 
 <body ng-controller="DatabaseController as dbc">
 
-  <div class="form-box bg-black" id="unlock-box" ng-show="dbc.locked">
+    <div ng-show="dbc.locked" class="unlockbackground">
+      <div class="unlockcontaier">
+        <form name="unlockForm" class="unlockinput">
+          <md-input-container>
+            <input name="password" type="password" required ng-model="dbc.password" placeholder="password">
+            <div ng-messages="unlockForm.password.$error">
+              <div ng-message="required">Please provide your password to unlock.</div>
+            </div>
+          </md-input-container>
 
-    <!-- START LOCK SCREEN ITEM -->
-    <div class="lockscreen-item">
-      <!-- lockscreen image -->
-      <div class="lockscreen-image">
-        <img src="../assets/img/passwger-logo.png" alt="user image" />
+        </form>
+        <md-button ng-click="dbc.unlockDb()" class="unlockbtn">Unlock</md-button>
       </div>
-      <!-- /.lockscreen-image -->
-
-      <!-- lockscreen credentials (contains the form) -->
-      <div class="lockscreen-credentials">
-
-        <div class="input-group">
-          <input type="password" class="form-control" id="password" placeholder="password" ng-model="dbc.password" />
-          <div class="input-group-btn">
-            <button class="btn btn-flat" id="unlock" ng-click="dbc.unlockDb()"><i class="fa fa-arrow-right text-muted"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- /.lockscreen credentials -->
-
     </div>
-    <!-- /.lockscreen-item -->
 
-    <div class="lockscreen-link">
-      <p style="color: #f9f9f9 !important;">
-        Please insert your database password to unlock it.
-      </p>
-    </div>
-  </div>
-
-  <div id="database-box" ng-hide="dbc.locked" >
+  <div ng-hide="dbc.locked" >
 
     <md-tabs class="md-primary" md-selected="dbc.selectedIndex">
       <md-tab id="tab1" aria-controls="tab1-content">
@@ -76,15 +59,25 @@
       </md-tab>
     </md-tabs>
 
-    <table class="table table-mailbox" ng-table="tableParams" show-filter="true">
-      <tr ng-repeat="entry in $data">
-        <td class='small-col' data-title="''">
-          <div class='domain-icon' style='background-image: url(' ../assets/img/placeholder-icon.png ');'></div>
-        </td>
-        <td class='name' data-title="'Name'" filter="{ 'name': 'text' }"><a href ng-click="dbc.setCurrentEntry(entry.id); dbc.showModal($event)" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal">{{ entry.name }}</a>
-        </td>
-      </tr>
-    </table>
+    <md-content>
+      <md-list ng-table="tableParams" show-filter="true">
+        <md-item ng-repeat="entry in $data">
+          <md-item-content ng-click="dbc.setCurrentEntry(entry.id); dbc.showModal($event)">
+          <div class="md-tile-left">
+            <img ng-src="../assets/img/placeholder-icon.png" class="face" alt="{{entry.name}}">
+          </div>
+          <div class="md-tile-content" data-title="'Name'" filter="{ 'name': 'text' }">
+            <h3>{{entry.name}}</h3>
+            <p ng-if="entry.domain">
+              {{entry.domain}}
+            </p>
+          </div>
+        </md-item-content>
+        </md-item>
+      </md-list>
+    </md-content>
+
+
 
     <md-button class="md-fab md-primary" md-theme="cyan" aria-label="Add new {{dbc.currentFolder}}" ng-click="dbc.unsetCurrentEntry(); dbc.showModal($event)" style="position: absolute; right: 30px; bottom:30px;">
       <md-tooltip>

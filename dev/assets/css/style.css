@@ -1,0 +1,33 @@
+.face {
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  width: 48px;
+  margin: 16px;
+}
+
+.unlockbackground{
+  background-color: rgb(46,204,113);
+}
+
+.unlockcontaier{
+  background: url('../img/passwger-logo.png') no-repeat center;
+  margin: 0;
+  height: 600px;
+  background-size: contain;
+  text-align: center;
+}
+
+.unlockinput{
+  width:250px;
+  margin: auto;
+  padding-top: 330px;
+  padding-left: 6px;
+}
+
+.unlockbtn{
+  margin: auto;
+}
+
+md-item-content {
+  cursor: pointer; cursor: hand;
+}
