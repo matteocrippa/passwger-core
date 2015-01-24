@@ -57,7 +57,6 @@ Once built you can start using the OSX64 binary in the build folder, if you want
 ## Thanks to
 Proudly developed thanks to other projects like:
 
-- [AdminLTE](https://github.com/almasaeed2010/AdminLTE)
 - [Node-Webkit](https://github.com/rogerwang/node-webkit)
 - [MyDashboard](https://github.com/arvindr21/mydashboard)
 
