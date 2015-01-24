@@ -54,19 +54,24 @@
       total: vm.db ? vm.db(vm.currentFolder).value().length : 0,
       getData: function($defer, params) {
 
-        var filteredData = params.filter() ?
+        if(vm.db){
+          var filteredData = params.filter() ?
           $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
           vm.db(vm.currentFolder).value()
 
-        var orderedData = params.sorting ?
+          var orderedData = params.sorting ?
           $filter('orderBy')(filteredData, params.orderBy()) :
           filteredData;
 
-        vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+          vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
-        params.total(orderedData.length)
+          params.total(orderedData.length)
 
-        $defer.resolve(vm.table)
+          $defer.resolve(vm.table)
+        }else{
+          $defer.resolve([])
+        }
+
       },
       $scope: {
         $data: {}
@@ -88,7 +93,7 @@
             console.log($scope.form)
             $mdDialog.hide()
           }
-          
+
         },
         templateUrl: 'modals/form.' + vm.currentFolder + '.tmpl.html',
         targetEvent: ev
@@ -97,9 +102,13 @@
 
 
     vm.totalFolderItems = function(folder) {
-      if (vm.db(folder).value()) {
-        return vm.db(folder).value().length
-      } else {
+      if(vm.db){
+        if (vm.db(folder).value()) {
+          return vm.db(folder).value().length
+        } else {
+          return 0
+        }
+      }else{
         return 0
       }
     }
