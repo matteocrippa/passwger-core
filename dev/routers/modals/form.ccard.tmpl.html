@@ -1,3 +1,85 @@
+<md-dialog aria-label="Credit Card">
+  <md-content>
+    <md-toolbar class="md-primary">
+      <h1 ng-hide="form.id" class="md-toolbar-tools">
+        Add new Credit Card
+      </h1>
+      <h1 ng-show="form.id" class="md-toolbar-tools">
+        Edit Credit Card
+      </h1>
+    </md-toolbar>
+    <md-content class="md-padding">
+      <form name="entryForm">
+
+        <md-input-container>
+          <label>Name</label>
+          <input name="name" required ng-model="form.name">
+          <div ng-messages="entryForm.name.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Type (Mastercard, Visa, ecc.)</label>
+          <input name="type" ng-model="form.type">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Number</label>
+          <input name="number" required ng-model="form.number">
+          <div ng-messages="entryForm.number.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <div layout layout-sm="column">
+
+          <md-input-container>
+            <label>CVV</label>
+              <input ng-if="!passwordReveal" name="cvv" type="password" ng-model="form.cvv">
+              <input ng-if="passwordReveal" name="cvv" type="text" ng-model="form.cvv">
+          </md-input-container>
+
+          <div ng-switch on="passwordReveal">
+            <md-button ng-switch-when="false" ng-click="revealPassword()">Reveal Password</md-button>
+            <md-button ng-switch-when="true" ng-click="copyPassword()">Copy Password</md-button>
+          </div>
+        </div>
+
+        <div layout layout-sm="column">
+
+          <md-input-container>
+            <label>Expiry Date</label>
+            <input name="expiry" ng-model="form.expiry">
+          </md-input-container>
+
+          <md-input-container>
+            <label>CardHolder</label>
+            <input name="cardholder" ng-model="form.cardholder">
+          </md-input-container>
+
+        </div>
+      </form>
+    </md-content>
+  </md-content>
+
+  <div class="md-actions" layout="row">
+    <md-button ng-click="cancel()">
+      Close
+    </md-button>
+    <span ng-show="form.id" flex></span>
+    <md-button ng-show="form.id" ng-click="remove()" class="md-warn">
+      Remove
+    </md-button>
+    <span flex></span>
+    <md-button ng-click="save()" class="md-primary">
+      Save
+    </md-button>
+  </div>
+
+</md-dialog>
+
+
 <div class="modal-body" ng-show="dbc.isCurrentFolder('ccard')">
   <p class="lead">Add new Credit Card</p>
   <div class="form-group">
