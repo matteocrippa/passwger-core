@@ -45,7 +45,11 @@
     })
 
     $scope.$watch(angular.bind(this, function(){
-      return this.db(vm.currentFolder).value().length
+      if(this.db){
+        return this.db(vm.currentFolder).value().length
+      }else{
+        return 0
+      }
     }),function(newVal, oldVal){
       $scope.tableParams.reload()
     })
@@ -92,6 +96,8 @@
             $scope.form = form
           }
 
+          $scope.passwordReveal = false
+
           $scope.cancel = function() {
             $mdDialog.cancel()
           }
@@ -127,6 +133,28 @@
 
             $mdDialog.hide()
 
+          }
+
+          $scope.revealPassword = function() {
+            $scope.passwordReveal = true
+          }
+
+          $scope.copyPassword = function() {
+
+            var gui = require('nw.gui')
+            var clipboard = gui.Clipboard.get()
+
+            clipboard.clear()
+
+            var item = ''
+
+            if($scope.form.cvv){
+              item = $scope.form.cvv
+            }else{
+              item = $scope.form.password
+            }
+
+            clipboard.set(item, 'text')
           }
 
         },
