@@ -81,12 +81,12 @@
         <td class='small-col' data-title="''">
           <div class='domain-icon' style='background-image: url(' ../assets/img/placeholder-icon.png ');'></div>
         </td>
-        <td class='name' data-title="'Name'" filter="{ 'name': 'text' }"><a href ng-click="dbc.setCurrentEntry('{{entry.id}}')" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal">{{ entry.name }}</a>
+        <td class='name' data-title="'Name'" filter="{ 'name': 'text' }"><a href ng-click="dbc.setCurrentEntry(entry.id); dbc.showModal($event)" class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal">{{ entry.name }}</a>
         </td>
       </tr>
     </table>
 
-    <md-button class="md-fab md-primary" md-theme="cyan" aria-label="Add new {{dbc.currentFolder}}" ng-click="dbc.showModal($event)" style="position: absolute; right: 30px; bottom:30px;">
+    <md-button class="md-fab md-primary" md-theme="cyan" aria-label="Add new {{dbc.currentFolder}}" ng-click="dbc.unsetCurrentEntry(); dbc.showModal($event)" style="position: absolute; right: 30px; bottom:30px;">
       <md-tooltip>
         Add new {{dbc.currentFolder}}
       </md-tooltip>

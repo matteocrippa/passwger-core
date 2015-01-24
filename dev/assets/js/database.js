@@ -80,7 +80,12 @@
 
     vm.showModal = function(ev) {
       $mdDialog.show({
-        controller: function($scope, $mdDialog) {
+        controller: function($scope, $mdDialog, form) {
+
+          if(form){
+            $scope.form = form
+          }
+
           $scope.hide = function() {
             $mdDialog.hide()
           }
@@ -91,12 +96,16 @@
 
           $scope.save = function(form) {
             console.log($scope.form)
+
             $mdDialog.hide()
           }
 
         },
         templateUrl: 'modals/form.' + vm.currentFolder + '.tmpl.html',
-        targetEvent: ev
+        targetEvent: ev,
+        locals: {
+          form: vm.currentEntry
+        }
       })
     }
 
@@ -141,16 +150,17 @@
     }
 
     vm.setCurrentEntry = function(item) {
-
-      vm.currentEntry = db(vm.currentFolder).find({
+      vm.currentEntry = vm.db(vm.currentFolder).find({
         id: item
-      })
+      }).value()
+    }
 
-      $log.log(vm.currentEntry)
+    vm.unsetCurrentEntry = function() {
+      vm.currentEntry = null
     }
 
     vm.removeEntry = function() {
-      db(vm.currentFolder).remove({
+      vm.db(vm.currentFolder).remove({
         id: vm.form.id
       })
       vm.currentEntry = null
