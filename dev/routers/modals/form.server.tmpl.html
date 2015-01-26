@@ -49,20 +49,22 @@
           <md-input-container>
             <label>Password</label>
 
-              <input ng-if="!passwordReveal" name="password" type="password" ng-model="form.password">
-              <input ng-if="passwordReveal" name="password" type="text" ng-model="form.password">
+            <input ng-if="!passwordReveal" name="password" type="password" ng-model="form.password">
+            <input ng-if="passwordReveal" name="password" type="text" ng-model="form.password">
 
             <div ng-messages="entryForm.password.$error">
               <div ng-message="required">This is required.</div>
             </div>
-
-            <div ng-switch on="passwordReveal">
-              <md-button ng-switch-when="false" ng-click="revealPassword()">Reveal Password</md-button>
-              <md-button ng-switch-when="true" ng-click="copyPassword()">Copy Password</md-button>
-            </div>
-
           </md-input-container>
 
+          <div ng-switch on="passwordReveal">
+            <div ng-switch-when="false">
+              <md-button ng-click="revealPassword()">Reveal Password</md-button>
+            </div>
+            <div ng-switch-when="true">
+              <md-button ng-click="copyPassword()">Copy Password</md-button>
+            </div>
+          </div>
         </div>
 
       </form>

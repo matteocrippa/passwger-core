@@ -43,8 +43,12 @@
           </md-input-container>
 
           <div ng-switch on="passwordReveal">
-            <md-button ng-switch-when="false" ng-click="revealPassword()">Reveal Password</md-button>
-            <md-button ng-switch-when="true" ng-click="copyPassword()">Copy Password</md-button>
+            <div ng-switch-when="false">
+              <md-button ng-click="revealPassword()">Reveal Password</md-button>
+            </div>
+            <div ng-switch-when="true">
+              <md-button ng-click="copyPassword()">Copy Password</md-button>
+            </div>
           </div>
         </div>
 
