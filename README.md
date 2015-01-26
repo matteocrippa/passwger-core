@@ -39,17 +39,15 @@ n/a
 ## Instructions
 In order to start to give a try to the project, once cloned you have to:
 
-`cd passwger-clone`
-
-`npm install`
-
-`cd dev`
-
-`npm install`
-
-`cd ..`
-
-`node builder.js`
+```
+cd passwger-clone
+npm install
+cd dev
+npm install
+bower install
+cd ..
+node builder.js
+```
 
 Once built you can start using the OSX64 binary in the build folder, if you want to test under different Os you have to tweak the builder.js file.
 
