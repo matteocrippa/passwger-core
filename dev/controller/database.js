@@ -32,6 +32,27 @@
 
     $window.document.title = 'Unlock Database // Passwger'
 
+    var tIdle
+
+    $window.onload = resetTimer
+    $window.onmousemove = resetTimer
+    $window.onmousedown = resetTimer
+    $window.onclick = resetTimer
+    $window.onscroll = resetTimer
+    $window.onkeypress = resetTimer
+
+    function logout() {
+      $scope.$apply(function(){
+        vm.password = ""
+        vm.locked = true
+      })
+    }
+
+    function resetTimer() {
+      clearTimeout(tIdle);
+      tIdle = setTimeout(logout, 300000);
+    }
+
     $scope.$watch(angular.bind(this, function() {
       return this.selectedIndex
     }), function(newVal, oldVal) {
