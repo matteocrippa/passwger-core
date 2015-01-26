@@ -26,7 +26,7 @@ _A cross-platform password manager._
 - multi browser integration
 - AES 256 encryption
 - locally stored database (but you can sync using dropbox, google drive, etc)
-- adminLTE flat design
+- material design
 
 ## Downloads
 
