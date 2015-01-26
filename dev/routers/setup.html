@@ -1,52 +1,53 @@
 <!DOCTYPE html>
-<html class="bg-black" ng-app="setup">
+<html ng-app="setup">
 
 <head>
   <meta charset="UTF-8">
   <title>Database setup // Passwger</title>
+
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-  <!-- bootstrap 3.0.2 -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <!-- font Awesome -->
-  <link href="../assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <!-- Theme style -->
-  <link href="../assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+
+  <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="../assets/js/libs/angular-material/angular-material.min.css" rel="stylesheet" />
+
+  <script src="../assets/js/libs/hammerjs/hammer.min.js" type="text/javascript"></script>
 
   <script src="../assets/js/libs/angular/angular.min.js" type="text/javascript"></script>
-  <script src='../assets/js/libs/angular-file-model/angular-file-model.js'></script>
+
+  <script src="../assets/js/libs/angular-animate/angular-animate.min.js" type="text/javascript"></script>
+  <script src="../assets/js/libs/angular-aria/angular-aria.min.js" type="text/javascript"></script>
+  <script src="../assets/js/libs/angular-messages/angular-messages.min.js" type="text/javascript"></script>
+  <script src="../assets/js/libs/angular-file-model/angular-file-model.js" type="text/javascript"></script>
+
+  <script src="../assets/js/libs/angular-material/angular-material.min.js" type="text/javascript"></script>
 
   <script src="../controller/setup.js" type="text/javascript"></script>
-  <script src="../assets/js/setup.js" type="text/javascript"></script>
 
 </head>
 
-<body class="bg-black">
+<body ng-controller="SetupController as setup">
 
-  <div class="form-box" id="login-box">
-    <div class="logo-small"></div>
-    <div class="header">Database setup</div>
+  <div class="unlockbackground">
+    <div class="unlockcontaier">
+      <form name="unlockForm" class="setupinput">
 
-    <form name="setupForm" ng-controller="SetupController as setup" ng-submit="setupForm.$valid && setup.createDb()" novalidate>
-      <div class="body bg-gray">
+        <md-input-container>
+          <input type="file" required name="pwdfile" file-model="setup.pwdfile" nwsaveas="grimorio.pwger" />
+          <div ng-messages="unlockForm.pwdfile.$error">
+            <div ng-message="required">Choose where to store your db</div>
+          </div>
+        </md-input-container>
 
-        <div class="form-group has-error" ng-show="setup.error">
-          <label class="control-label" id="form-val"><i class="fa fa-times-circle-o"></i> {{ setup.error }}</label>
-        </div>
+        <md-input-container>
+          <input type="password" required name="password" ng-model="setup.password" class="form-control" placeholder="Database Password" />
+          <div ng-messages="unlockForm.password.$error">
+            <div ng-message="required">Please provide a password to lock the db.</div>
+          </div>
+        </md-input-container>
 
-        <div class="form-group has-error">
-          <label class="has-info">Choose where to store your db:</label>
-          <input type="file" name="pwdfile" file-model="setup.pwdfile" nwsaveas="grimorio.pwger" />
-        </div>
-
-        <div class="form-group has-error">
-          <input type="password" name="password" ng-model="setup.password" class="form-control" placeholder="Database Password" />
-        </div>
-      </div>
-      <div class="footer">
-        <button type="submit" id="login" class="btn bg-olive btn-block">Save and proceed</button>
-      </div>
-
-    </form>
+      </form>
+      <md-button ng-click="setup.createDb()" class="unlockbtn">Save and proceed</md-button>
+    </div>
   </div>
 
 </body>
