@@ -4,6 +4,7 @@
   "description": "A crossplatform password manager",
   "main": "routers/index.html",
   "dependencies": {
+    "body-parser": "^1.10.2",
     "express": "^4.10.6",
     "lowdb": "matteocrippa/lowdb",
     "node-uuid": "^1.4.2"

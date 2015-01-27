@@ -1,27 +1,21 @@
 (function() {
 
-  var https = require('https')
-  var fs = require('fs')
-  var path = require('path')
+  var http = require('http')
   var express = require('express')
   var app = express()
+  var bodyParser = require('body-parser')
 
-  var privateKey = fs.readFileSync(path.join(process.cwd(), 'certs', 'server.key'), 'utf8')
-  var cerificate = fs.readFileSync(path.join(process.cwd(), 'certs', 'server.crt'), 'utf8')
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded())
 
-  var credentials = {
-    key: privateKey,
-    cert: cerificate
-  }
-
-  var lowdb = require('lowdb')
+  var low = require('lowdb')
 
   var options = {
     host: 'localhost',
     port: 12358
-  };
+  }
 
-  https.get(options, function(res) {
+  http.get(options, function(res) {
     console.log('server is running, redirecting to localhost');
   }).on('error', function(e) {
 
@@ -36,7 +30,7 @@
       try {
         var db = low(localStorage.getItem('database'), {
           encrypt: true,
-          passkey: req.body.password
+          passkey: req.body.pwd
         })
 
         res.send({
@@ -51,9 +45,9 @@
 
     })
 
-    https.createServer(credentials, app).listen(options.port, function(err) {
+    http.createServer(app).listen(options.port, function(err) {
       console.log('server created');
-    });
-  });
+    })
+  })
 
 })()
