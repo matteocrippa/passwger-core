@@ -13,11 +13,9 @@ _A cross-platform password manager._
 
 ### Client
 
-![Password Setup](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen3.png)
+![Passwger Password Unlock](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen4.png)
 
-![Password Unlock](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen2.png)
-
-![Password Database](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen1.png)
+![Passwger Password Entry](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen5.png)
 
 
 ## Features
