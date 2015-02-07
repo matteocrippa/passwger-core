@@ -16,7 +16,7 @@
   }
 
   http.get(options, function(res) {
-    console.log('server is running, redirecting to localhost');
+    //console.log('server is running, redirecting to localhost');
   }).on('error', function(e) {
 
     app.set('port', options.port);
@@ -46,7 +46,7 @@
     })
 
     http.createServer(app).listen(options.port, function(err) {
-      console.log('server created');
+      //console.log('server created');
     })
   })
 

@@ -88,60 +88,29 @@
       vm.reloadTable()
       //$scope.tableParams.reload()
     })
-    
+
     $scope.$watch(angular.bind(this, function() {
       return this.filter
     }), function(newVal, oldVal) {
       vm.reloadTable()
     })
-    
+
     vm.reloadTable = function() {
-      
-      if(vm.db) {
-        
+
+      if(vm.db && vm.currentFolder) {
+
+        $log.log('reloading table')
+
         var dbItems = vm.db(vm.currentFolder).value()
-        
-        var filteredData = vm.filter ? _.filter(dbItems, function(item){ return item.name.indexOf(vm.filter) != -1 }) : dbItems
-      
-        vm.tableData = _.orderBy(filteredData, function(item){ retun item.name })
-        
+
+        var filteredData = vm.filter ? _.filter(dbItems, function(item){ return item.name.toLowerCase().indexOf(vm.filter.toLowerCase()) != -1 }) : dbItems
+
+        vm.tableData = _.sortBy(filteredData, function(item){ return item.name })
+
+        $log.log(vm.tableData)
       }
-      
+
     }
-
-    /*$scope.tableParams = new ngTableParams({
-      page: 1,
-      count: 20,
-      sorting: {
-        name: 'asc'
-      }
-    }, {
-      total: vm.db ? vm.db(vm.currentFolder).value().length : 0,
-      getData: function($defer, params) {
-
-        if(vm.db){
-          var filteredData = params.filter() ?
-          $filter('filter')(vm.db(vm.currentFolder).value(), params.filter()) :
-          vm.db(vm.currentFolder).value()
-
-          var orderedData = params.sorting ?
-          $filter('orderBy')(filteredData, params.orderBy()) :
-          filteredData;
-
-          vm.table = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-
-          params.total(orderedData.length)
-
-          $defer.resolve(vm.table)
-        }else{
-          $defer.resolve([])
-        }
-
-      },
-      $scope: {
-        $data: {}
-      }
-    })*/
 
     vm.showModal = function(ev) {
       $mdDialog.show({
@@ -250,7 +219,9 @@
 
         $window.document.title = 'Database // Passwger'
 
-        $scope.tableParams.reload()
+        //$scope.tableParams.reload()
+
+        vm.reloadTable()
 
       } else {
         vm.locked = true
