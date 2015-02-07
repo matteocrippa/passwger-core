@@ -3,6 +3,7 @@
   var fs = require('fs')
   var low = require('lowdb')
   var uuid = require('node-uuid')
+  var _ = require('underscore')
 
   var gui = require('nw.gui');
   win = gui.Window.get();
@@ -34,6 +35,7 @@
 
     vm.db = null
     vm.table = null
+    vm.tableData = []
     vm.currentFolder = 'password'
     vm.locked = true
     vm.currentEntry = null
@@ -72,7 +74,8 @@
     $scope.$watch(angular.bind(this, function() {
       return this.currentFolder
     }), function(newVal, oldVal) {
-      $scope.tableParams.reload()
+      //$scope.tableParams.reload()
+      vm.reloadTable()
     })
 
     $scope.$watch(angular.bind(this, function(){
@@ -82,10 +85,31 @@
         return 0
       }
     }),function(newVal, oldVal){
-      $scope.tableParams.reload()
+      vm.reloadTable()
+      //$scope.tableParams.reload()
     })
+    
+    $scope.$watch(angular.bind(this, function() {
+      return this.filter
+    }), function(newVal, oldVal) {
+      vm.reloadTable()
+    })
+    
+    vm.reloadTable = function() {
+      
+      if(vm.db) {
+        
+        var dbItems = vm.db(vm.currentFolder).value()
+        
+        var filteredData = vm.filter ? _.filter(dbItems, function(item){ return item.name.indexOf(vm.filter) != -1 }) : dbItems
+      
+        vm.tableData = _.orderBy(filteredData, function(item){ retun item.name })
+        
+      }
+      
+    }
 
-    $scope.tableParams = new ngTableParams({
+    /*$scope.tableParams = new ngTableParams({
       page: 1,
       count: 20,
       sorting: {
@@ -117,7 +141,7 @@
       $scope: {
         $data: {}
       }
-    })
+    })*/
 
     vm.showModal = function(ev) {
       $mdDialog.show({
