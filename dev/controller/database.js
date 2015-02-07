@@ -3,7 +3,7 @@
   var fs = require('fs')
   var low = require('lowdb')
   var uuid = require('node-uuid')
-  
+
   var gui = require('nw.gui');
   win = gui.Window.get();
   var nativeMenuBar = new gui.Menu({ type: "menubar" });

@@ -44,49 +44,62 @@
       </div>
     </div>
 
-  <div ng-hide="dbc.locked" >
+    <div ng-hide="dbc.locked" layout="column" style="padding-bottom: 15px;">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-tabs class="md-primary" md-selected="dbc.selectedIndex">
+            <md-tab id="tab1" aria-controls="tab1-content">
+              Password ({{ dbc.totalFolderItems('password') }})
+            </md-tab>
+            <md-tab id="tab2" aria-controls="tab2-content">
+              Server ({{ dbc.totalFolderItems('server') }})
+            </md-tab>
+            <md-tab id="tab3" aria-controls="tab3-content">
+              Wi-Fi ({{ dbc.totalFolderItems('wifi') }})
+            </md-tab>
+            <md-tab id="tab4" aria-controls="tab4-content">
+              Credit Card ({{ dbc.totalFolderItems('ccard') }})
+            </md-tab>
+          </md-tabs>
+        </div>
+        <md-input-container>
+          <label>Filter items</label>
+          <input ng-model="dbc.filter">
+        </md-input-container>
+      </md-toolbar>
 
-    <md-tabs class="md-primary" md-selected="dbc.selectedIndex">
-      <md-tab id="tab1" aria-controls="tab1-content">
-        Password ({{ dbc.totalFolderItems('password') }})
-      </md-tab>
-      <md-tab id="tab2" aria-controls="tab2-content">
-        Server ({{ dbc.totalFolderItems('server') }})
-      </md-tab>
-      <md-tab id="tab3" aria-controls="tab3-content">
-        Wi-Fi ({{ dbc.totalFolderItems('wifi') }})
-      </md-tab>
-      <md-tab id="tab4" aria-controls="tab4-content">
-        Credit Card ({{ dbc.totalFolderItems('ccard') }})
-      </md-tab>
-    </md-tabs>
+      <md-content class="md-padding" style="height: 600px;">
+        <md-content>
+          <md-list ng-table="tableParams">
+            <md-item ng-repeat="entry in $data">
+              <md-item-content ng-click="dbc.setCurrentEntry(entry.id); dbc.showModal($event)">
+                <div class="md-tile-left">
+                  <img ng-src="../assets/img/placeholder-icon.png" class="face" alt="{{entry.name}}">
+                </div>
+                <div class="md-tile-content" data-title="'Name'" filter="{ 'name': 'text' }">
+                  <h3>{{entry.name}}</h3>
+                  <p ng-if="entry.domain">
+                    {{entry.domain}}
+                  </p>
+                </div>
+              </md-item-content>
+            </md-item>
+          </md-list>
+        </md-content>
 
-    <md-content>
-      <md-list ng-table="tableParams" show-filter="true">
-        <md-item ng-repeat="entry in $data">
-          <md-item-content ng-click="dbc.setCurrentEntry(entry.id); dbc.showModal($event)">
-          <div class="md-tile-left">
-            <img ng-src="../assets/img/placeholder-icon.png" class="face" alt="{{entry.name}}">
-          </div>
-          <div class="md-tile-content" data-title="'Name'" filter="{ 'name': 'text' }">
-            <h3>{{entry.name}}</h3>
-            <p ng-if="entry.domain">
-              {{entry.domain}}
-            </p>
-          </div>
-        </md-item-content>
-        </md-item>
-      </md-list>
-    </md-content>
+      </md-content>
+
+      <md-button class="md-fab md-primary" md-theme="cyan" aria-label="Add new {{dbc.currentFolder}}" ng-click="dbc.unsetCurrentEntry(); dbc.showModal($event)" style="position: absolute; right: 30px; bottom:30px;">
+        <md-tooltip>
+          Add new {{dbc.currentFolder}}
+        </md-tooltip>
+        +
+      </md-button>
+  </div>
 
 
 
-    <md-button class="md-fab md-primary" md-theme="cyan" aria-label="Add new {{dbc.currentFolder}}" ng-click="dbc.unsetCurrentEntry(); dbc.showModal($event)" style="position: absolute; right: 30px; bottom:30px;">
-      <md-tooltip>
-        Add new {{dbc.currentFolder}}
-      </md-tooltip>
-      +
-    </md-button>
+
 
 </body>
 
