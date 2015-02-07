@@ -33,7 +33,7 @@ _A cross-platform password manager._
 n/a
 
 ### Browser plugin
-n/a
+- [Google Chrome](https://chrome.google.com/webstore/detail/lebiigobcnfanjjolbmkkjlpjoaeeinn/publish-delayed?hl=it)
 
 ## Instructions
 In order to start to give a try to the project, once cloned you have to:
