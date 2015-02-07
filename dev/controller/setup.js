@@ -14,6 +14,19 @@
 
     vm.error = ""
 
+    vm.setExistingDb = function() {
+      if (!vm.pwdfile) {
+        vm.error = "You must select where is your current db!"
+      }else if(!fs.existsSync(vm.pwdfile.path)){
+        vm.error = "Db file doesn't exist"
+      }else{
+
+        localStorage.setItem('database', vm.pwdfile.path)
+
+        $window.location.href = '../routers/database.html'
+      }
+    }
+
     vm.createDb = function() {
       if (!vm.pwdfile) {
         vm.error = "You must select where to store your db!"
@@ -21,15 +34,7 @@
         vm.error = "You must setup a password for lock your db!"
       } else if (vm.password.length < 4) {
         vm.error = "Password must be, at least, 4 chars long!"
-      } else if (fs.existsSync(vm.pwdfile.path)) {
-
-        alert('Using already existing db')
-
-        localStorage.setItem('database', vm.pwdfile.path)
-
-        $window.location.href = '../routers/database.html'
-
-      } else {
+      }  else {
         localStorage.setItem('database', vm.pwdfile.path)
 
         var low = require('lowdb')
@@ -42,7 +47,6 @@
         db('settings').push({
           created: new Date().getTime()
         })
-
 
         $window.location.href = '../routers/database.html'
       }

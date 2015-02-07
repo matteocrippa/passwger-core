@@ -40,31 +40,42 @@
           </p>
         </md-switch>
 
-        <md-input-container ng-if="setup.write">
-          <input type="file" required name="pwdfile" file-model="setup.pwdfile" nwsaveas="grimorio.pwger" />
-          <div ng-messages="unlockForm.pwdfile.$error">
-            <div ng-message="required">Choose where to store your db</div>
+        <div ng-switch="setup.write">
+
+          <div ng-switch-when="true">
+
+            <md-input-container >
+              <input type="file" required name="pwdfile" file-model="setup.pwdfile" nwsaveas="grimorio.pwger" />
+              <div ng-messages="unlockForm.pwdfile.$error">
+                <div ng-message="required">Choose where to store your db</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container>
+              <input type="password" required name="password" ng-model="setup.password" class="form-control" placeholder="Database Password" />
+              <div ng-messages="unlockForm.password.$error">
+                <div ng-message="required">Please provide a password to lock the db.</div>
+              </div>
+            </md-input-container>
+
+            <md-button ng-if="setup.write" ng-click="setup.createDb()" class="unlockbtn">Create and proceed</md-button>
+
           </div>
-        </md-input-container>
+          <div ng-switch-default>
 
-        <md-input-container ng-if="setup.write">
-          <input type="password" required name="password" ng-model="setup.password" class="form-control" placeholder="Database Password" />
-          <div ng-messages="unlockForm.password.$error">
-            <div ng-message="required">Please provide a password to lock the db.</div>
+            <md-input-container >
+              <input type="file" required name="pwdfile" file-model="setup.pwdfile" />
+              <div ng-messages="unlockForm.pwdfile.$error">
+                <div ng-message="required">Pick your existing db</div>
+              </div>
+            </md-input-container>
+
+            <md-button ng-if="!setup.write" ng-click="setup.setExistingDb()" class="unlockbtn">Save and proceed</md-button>
+
           </div>
-        </md-input-container>
-
-
-        <md-input-container ng-if="!setup.write">
-          <input type="file" required name="pwdfile" file-model="setup.pwdfile" />
-          <div ng-messages="unlockForm.pwdfile.$error">
-            <div ng-message="required">Pick your existing db</div>
-          </div>
-        </md-input-container>
-
+        </div>
 
       </form>
-      <md-button ng-click="setup.createDb()" class="unlockbtn">Save and proceed</md-button>
     </div>
   </div>
 
