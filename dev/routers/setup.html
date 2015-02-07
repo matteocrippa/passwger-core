@@ -31,19 +31,37 @@
     <div class="unlockcontaier">
       <form name="unlockForm" class="setupinput">
 
-        <md-input-container>
+        <md-switch ng-model="setup.write" aria-label="Switch 1">
+          <p ng-if="setup.write">
+            Create new database
+          </p>
+          <p ng-if="!setup.write">
+            Read existing database
+          </p>
+        </md-switch>
+
+        <md-input-container ng-if="setup.write">
           <input type="file" required name="pwdfile" file-model="setup.pwdfile" nwsaveas="grimorio.pwger" />
           <div ng-messages="unlockForm.pwdfile.$error">
             <div ng-message="required">Choose where to store your db</div>
           </div>
         </md-input-container>
 
-        <md-input-container>
+        <md-input-container ng-if="setup.write">
           <input type="password" required name="password" ng-model="setup.password" class="form-control" placeholder="Database Password" />
           <div ng-messages="unlockForm.password.$error">
             <div ng-message="required">Please provide a password to lock the db.</div>
           </div>
         </md-input-container>
+
+
+        <md-input-container ng-if="!setup.write">
+          <input type="file" required name="pwdfile" file-model="setup.pwdfile" />
+          <div ng-messages="unlockForm.pwdfile.$error">
+            <div ng-message="required">Pick your existing db</div>
+          </div>
+        </md-input-container>
+
 
       </form>
       <md-button ng-click="setup.createDb()" class="unlockbtn">Save and proceed</md-button>

@@ -1,5 +1,7 @@
 (function() {
 
+  var fs = require('fs')
+
   if (localStorage.getItem('database')) {
     location.href = '../routers/database.html';
   }
@@ -19,6 +21,14 @@
         vm.error = "You must setup a password for lock your db!"
       } else if (vm.password.length < 4) {
         vm.error = "Password must be, at least, 4 chars long!"
+      } else if (fs.existsSync(vm.pwdfile.path)) {
+
+        alert('Using already existing db')
+
+        localStorage.setItem('database', vm.pwdfile.path)
+
+        $window.location.href = '../routers/database.html'
+
       } else {
         localStorage.setItem('database', vm.pwdfile.path)
 
