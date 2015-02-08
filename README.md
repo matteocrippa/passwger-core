@@ -25,7 +25,6 @@ _A cross-platform password manager._
 - AES 256 encryption
 - locally stored database (but you can sync using dropbox, google drive, etc)
 - material design
-- https connection for plugins (http://www.akadia.com/services/ssh_test_certificate.html)
 
 ## Downloads
 
