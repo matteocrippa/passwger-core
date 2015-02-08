@@ -12,7 +12,7 @@
     nativeMenuBar.createMacBuiltin("My App");
     win.menu = nativeMenuBar;
   } catch (ex) {
-    console.log(ex.message);
+    //console.log(ex.message);
   }
 
   if (!localStorage.getItem('database')) {
@@ -25,9 +25,9 @@
   }
 
   angular
-    .module('database', ['ngTable', 'ngMaterial', 'ngMessages'])
+    .module('database', ['ngMaterial', 'ngMessages'])
 
-  function DatabaseController($log, $scope, $mdDialog, $window, $filter, ngTableParams) {
+  function DatabaseController($log, $scope, $mdDialog, $window, $filter) {
 
     var folders = ['password', 'server', 'wifi', 'ccard']
 
@@ -74,7 +74,6 @@
     $scope.$watch(angular.bind(this, function() {
       return this.currentFolder
     }), function(newVal, oldVal) {
-      //$scope.tableParams.reload()
       vm.reloadTable()
     })
 
@@ -86,7 +85,6 @@
       }
     }),function(newVal, oldVal){
       vm.reloadTable()
-      //$scope.tableParams.reload()
     })
 
     $scope.$watch(angular.bind(this, function() {
@@ -99,7 +97,7 @@
 
       if(vm.db && vm.currentFolder) {
 
-        $log.log('reloading table')
+        //$log.log('reloading table')
 
         var dbItems = vm.db(vm.currentFolder).value()
 
@@ -107,7 +105,7 @@
 
         vm.tableData = _.sortBy(filteredData, function(item){ return item.name })
 
-        $log.log(vm.tableData)
+        //$log.log(vm.tableData)
       }
 
     }
@@ -218,8 +216,6 @@
         vm.locked = false
 
         $window.document.title = 'Database // Passwger'
-
-        //$scope.tableParams.reload()
 
         vm.reloadTable()
 
