@@ -9,15 +9,6 @@ _A cross-platform password manager._
 
 **Passwger** allows you to manage your password easily under **multiple Os** (**Mac, Windows, Linux**).
 
-## Screenshots
-
-### Client
-
-![Passwger Password Unlock](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen4.png)
-
-![Passwger Password Entry](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen5.png)
-
-
 ## Features
 
 - multi-OS client
@@ -29,12 +20,21 @@ _A cross-platform password manager._
 ## Downloads
 
 ### Client
-n/a
+- [OSX 64bit alpha](https://github.com/passwger/passwger-core/releases/download/0.1/passwger-osx.zip)
 
 ### Browser plugin
 - [Google Chrome](https://chrome.google.com/webstore/detail/lebiigobcnfanjjolbmkkjlpjoaeeinn/publish-delayed?hl=it)
 
-## Instructions
+## Screenshots
+
+### Client
+
+![Passwger Password Unlock](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen4.png)
+
+![Passwger Password Entry](https://raw.githubusercontent.com/passwger/passwger-core/master/screenshots/screen5.png)
+
+
+## How to compile
 In order to start to give a try to the project, once cloned you have to:
 
 ```
