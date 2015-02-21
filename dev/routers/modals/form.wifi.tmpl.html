@@ -19,10 +19,14 @@
           </div>
         </md-input-container>
 
-        <md-input-container>
-          <label>Authentication Method (WEP, WPA, WPA2)</label>
-          <input name="authentication" ng-model="form.authentication">
-        </md-input-container>
+        <md-select ng-model="form.authentication" placeholder="Authentication Method">
+          <md-option value="WEP">WEP</md-option>
+          <md-option value="WPA">WPA</md-option>
+          <md-option value="WPA2">WPA2</md-option>
+        </md-select>
+
+        <br>
+        <br>
 
         <md-input-container>
           <label>Username</label>

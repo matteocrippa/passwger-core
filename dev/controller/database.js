@@ -119,6 +119,7 @@
           }
 
           $scope.passwordReveal = false
+          $scope.secureCodeReveal = false
 
           $scope.cancel = function() {
             $mdDialog.cancel()
@@ -159,6 +160,25 @@
 
           $scope.revealPassword = function() {
             $scope.passwordReveal = true
+          }
+
+          $scope.revealSecureCode = function() {
+            $scope.secureCodeReveal = true
+          }
+
+          $scope.copySecureCode = function() {
+
+            var gui = require('nw.gui')
+            var clipboard = gui.Clipboard.get()
+
+            clipboard.clear()
+
+            var item = ''
+
+
+            item = $scope.form.securecode
+
+            clipboard.set(item, 'text')
           }
 
           $scope.copyPassword = function() {

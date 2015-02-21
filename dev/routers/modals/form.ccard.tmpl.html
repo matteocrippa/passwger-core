@@ -19,11 +19,15 @@
           </div>
         </md-input-container>
 
-        <md-input-container>
-          <label>Type (Mastercard, Visa, ecc.)</label>
-          <input name="type" ng-model="form.type">
-        </md-input-container>
+        <md-select ng-model="form.type" placeholder="Cardtype">
+          <md-option value="Visa">Visa</md-option>
+          <md-option value="Mastercard">Mastercard</md-option>
+          <md-option value="American Express">American Express</md-option>
+          <md-option value="Other">Other</md-option>
+        </md-select>
 
+        <br>
+        <br>
         <md-input-container>
           <label>Number</label>
           <input name="number" required ng-model="form.number">
@@ -53,7 +57,7 @@
         <div layout layout-sm="column">
 
           <md-input-container>
-            <label>Expiry Date</label>
+            <label>Expiry date</label>
             <input name="expiry" ng-model="form.expiry">
           </md-input-container>
 
@@ -63,6 +67,34 @@
           </md-input-container>
 
         </div>
+
+        <div layout layout-sm="column">
+
+          <md-input-container>
+            <label>Secure Code</label>
+            <input ng-if="!secureCodeReveal" name="securecode" type="password" ng-model="form.securecode">
+            <input ng-if="secureCodeReveal" name="securecode" type="text" ng-model="form.securecode">
+          </md-input-container>
+
+          <div ng-switch on="secureCodeReveal">
+            <div ng-switch-when="false">
+              <md-button ng-click="revealSecureCode()">Reveal SecureCode</md-button>
+            </div>
+            <div ng-switch-when="true">
+              <md-button ng-click="copySecureCode()">Copy SecureCode</md-button>
+            </div>
+          </div>
+        </div>
+
+        <div layout layout-sm="column">
+
+          <md-input-container flex>
+            <label>Extra info</label>
+            <textarea ng-model="form.info" columns="1" md-maxlength="150"></textarea>
+          </md-input-container>
+
+        </div>
+
       </form>
     </md-content>
   </md-content>
