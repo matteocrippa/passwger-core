@@ -110,6 +110,18 @@
 
     }
 
+    vm.iconizeTitle = function(title){
+      var tokens = title.split(" ")
+
+      var response = tokens[0].charAt(0)
+
+      if(tokens.length >1){
+        response += tokens[1].charAt(0)
+      }
+
+      return response.toUpperCase()
+    }
+
     vm.showModal = function(ev) {
       $mdDialog.show({
         controller: function($scope, $mdDialog, form) {

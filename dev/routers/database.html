@@ -71,7 +71,9 @@
             <md-item ng-repeat="entry in dbc.tableData track by $index">
               <md-item-content ng-click="dbc.setCurrentEntry(entry.id); dbc.showModal($event)">
                 <div class="md-tile-left">
-                  <img ng-src="../assets/img/placeholder-icon.png" class="face" alt="{{entry.name}}">
+                  <md-button class="md-primary md-fab">
+                    {{ dbc.iconizeTitle(entry.name) }}
+                  </md-button>
                 </div>
                 <div class="md-tile-content" data-title="'Name'" filter="{ 'name': 'text' }">
                   <h3>{{entry.name}}</h3>
